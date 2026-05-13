@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude plugin *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\ArneBogaert\\\\Desktop\\\\WebsiteBeheer\\\\Site T'peronneke\\\\WebsiteRepo\" -Force)",
+      "Bash(Select-Object Name, Mode)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ArneBogaert\\\\Desktop\\\\WebsiteBeheer\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if\\($_.PSIsContainer\\){\"Dir\"}else{\"File\"}}} | Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ArneBogaert\\\\Desktop\\\\WebsiteBeheer\\\\Site T'peronneke\" -Force | Select-Object Name, @{Name=\"Type\"; Expression={if\\($_.PSIsContainer\\){\"Dir\"}else{\"File\"}}} | Format-Table -AutoSize)",
+      "PowerShell([System.IO.Directory]::EnumerateFileSystemEntries\\(\"C:\\\\Users\\\\ArneBogaert\\\\Desktop\\\\WebsiteBeheer\\\\Site T'peronneke\\\\WebsiteRepo\"\\) | Sort-Object)",
+      "Bash(git -C \"c:\\\\Users\\\\ArneBogaert\\\\Desktop\\\\WebsiteBeheer\\\\Site T'peronneke\\\\WebsiteRepo\" status)",
+      "Bash(git -C \"c:\\\\Users\\\\ArneBogaert\\\\Desktop\\\\WebsiteBeheer\\\\Site T'peronneke\\\\WebsiteRepo\" remote -v)"
+    ]
+  }
+}
