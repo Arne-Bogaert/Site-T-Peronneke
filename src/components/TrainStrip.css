@@ -1,0 +1,52 @@
+.train-strip {
+  position: relative;
+  width: 100%;
+  height: 46px;
+  overflow: hidden;
+}
+
+/* Railtrack: tiled horizontaal langs de bodem */
+.train-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 9px;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  image-rendering: pixelated;
+}
+
+/* Treingroep: start direct zichtbaar aan de linkerrand, rijdt naadloos naar rechts */
+.train-group {
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  /* -100% = eigen breedte: trein start net buiten de linkerrand */
+  animation: trainRide 34s linear infinite;
+  will-change: transform;
+}
+
+.train-img {
+  height: 34px;
+  width: auto;
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* Van net buiten linkerrand (-100% eigen breedte) naar buiten rechterrand (110vw).
+   Beide posities zijn off-screen → de jump terug is onzichtbaar → naadloze loop. */
+@keyframes trainRide {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(110vw); }
+}
+
+/* Bij reduced motion: trein verdwijnt, railtrack blijft */
+@media (prefers-reduced-motion: reduce) {
+  .train-group {
+    display: none;
+  }
+}

@@ -1,37 +1,105 @@
-import trainGif     from '../assets/train/train_v18.gif'
-import car1Gif      from '../assets/train/carriage_v18_car1.gif'
-import car2Gif      from '../assets/train/carriage_v18_car2.gif'
-import car5Gif      from '../assets/train/carriage_v18_car5.gif'
-import car9Gif      from '../assets/train/carriage_v18_car9.gif'
-import railtrackImg from '../assets/train/railtrack_v1.png'
+import { useState, useEffect } from 'react'
+import fullLogoImg from "../assets/'T Perron Logo.png"
 import './Navbar.css'
 
+const NAV_LINKS = [
+  { label: 'Over ons',  href: '#over-ons'  },
+  { label: 'Menu',      href: '#menu'      },
+  { label: 'Locatie',   href: '#locatie'   },
+  { label: 'Contact',   href: '#contact'   },
+]
+
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  const close = () => setMenuOpen(false)
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const menu = document.getElementById('mobile-nav')
+    if (!menu) return
+    const focusable = Array.from(
+      menu.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    )
+    const first = focusable[0]
+    const last  = focusable[focusable.length - 1]
+    const onKey = (e) => {
+      if (e.key === 'Escape') { close(); return }
+      if (e.key !== 'Tab') return
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last?.focus() }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first?.focus() }
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    first?.focus()
+    return () => document.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <div className="train-container">
-          <div className="train-group">
-            <img src={car5Gif} alt="" className="pixel carriage" />
-            <img src={car2Gif} alt="" className="pixel carriage" />
-            <img src={car9Gif} alt="" className="pixel carriage" />
-            <img src={car1Gif} alt="" className="pixel carriage" />
-            <img src={trainGif} alt="" className="pixel locomotive" />
-          </div>
-          <div
-            className="railtrack"
-            style={{ backgroundImage: `url(${railtrackImg})` }}
-          />
-        </div>
+    <>
+<header className={`navbar${scrolled ? ' is-scrolled' : ''}`}>
+      {/* Hoofdbalk */}
+      <div className="navbar-bar">
+        <a href="#" className="navbar-brand" aria-label="'t Perroneke — startpagina">
+          <img src={fullLogoImg} alt="" className="navbar-brand-logo" />
+        </a>
+
+        {/* Desktop links */}
+        <nav className="navbar-links" aria-label="Hoofdnavigatie">
+          {NAV_LINKS.map(link => (
+            <a key={link.href} href={link.href} className="navbar-link">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Hamburger */}
+        <button
+          className={`navbar-hamburger${menuOpen ? ' is-open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
+          aria-expanded={menuOpen}
+          aria-controls={menuOpen ? 'mobile-nav' : undefined}
+        >
+          <span className="ham-line" />
+          <span className="ham-line" />
+          <span className="ham-line" />
+        </button>
       </div>
 
-      <div className="navbar-links">
-        <a href="#over-ons">Over ons</a>
-        <a href="#menu">Menu</a>
-        <a href="#locatie">Locatie</a>
-        <a href="#contact">Contact</a>
-        <a href="#reservaties">Reservaties</a>
-      </div>
-    </nav>
+      {/* Mobiel menu */}
+      {menuOpen && (
+        <div id="mobile-nav" className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigatie">
+          <nav className="mobile-menu-links">
+            {NAV_LINKS.map((link, i) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="mobile-menu-link"
+                style={{ animationDelay: `${i * 60 + 80}ms` }}
+                onClick={close}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
+      </header>
+    </>
   )
 }

@@ -1,103 +1,232 @@
+/* ── Navbar — systeem gebouwd rond logogrootte (64px) ────────── */
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 110px;
-  background: rgba(6, 5, 3, 0.97);
+  z-index: 100;
+  transition:
+    background 0.6s var(--ease-smooth),
+    box-shadow 0.6s var(--ease-smooth);
+}
+
+.navbar.is-scrolled {
+  background: rgba(237, 233, 225, 0.92);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(36, 97, 168, 0.08);
+}
+
+/* ── Hoofdbalk: hoogte afgeleid van logo + adembreedte ──────── */
+.navbar-bar {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
-  z-index: 1000;
-  /* diagonal step falls under the "Over ons" link */
-  clip-path: polygon(
-    0% 0%,
-    100% 0%,
-    100% 73%,
-    calc(100% - 480px) 73%,
-    calc(100% - 540px) 100%,
-    0% 100%
-  );
+  height: 100px;
+  padding: 0 clamp(24px, 4vw, 56px) 0 clamp(16px, 2.5vw, 32px);
 }
 
-/* ── Left: train area ── */
-.navbar-left {
-  position: relative;
-  flex: 1;
-  overflow: hidden;
-}
-
-.train-container {
-  position: absolute;
-  inset: 0;
-}
-
-.train-group {
-  position: absolute;
-  bottom: 12px;
-  right: 0;
+/* ── Logo-container: geen achtergrond, filter verwijdert wit ── */
+.navbar-brand {
   display: flex;
-  align-items: flex-end;
-  transform: translateX(calc(-100vw - 300px));
-  animation: trainEnter 5.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  align-items: center;
+  transition: opacity 0.2s var(--ease-smooth);
+  margin-top: 30px;
+  margin-left: -48px;
 }
 
-@keyframes trainEnter {
-  from { transform: translateX(calc(-100vw - 300px)); }
-  to   { transform: translateX(0); }
+.navbar-brand:hover {
+  opacity: 0.85;
 }
 
-.pixel {
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-}
-
-.locomotive {
-  height: 56px;
+.navbar-brand-logo {
+  height: 192px;
   width: auto;
+  display: block;
 }
 
-.carriage {
-  height: 48px;
-  width: auto;
-}
-
-/* Rail track tiled across the bottom */
-.railtrack {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 12px;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  image-rendering: pixelated;
-}
-
-/* ── Right: nav links ── */
+/* ── Desktop nav links ───────────────────────────────────────── */
 .navbar-links {
   display: flex;
   align-items: center;
-  align-self: flex-start;
-  gap: 36px;
-  padding-left: 16px;
-  padding-right: 48px;
-  padding-top: 26px;
-  padding-bottom: 26px;
+  gap: 40px;
 }
 
-.navbar-links a {
-  color: rgba(245, 232, 204, 0.78);
-  text-decoration: none;
-  font-size: 13px;
+.navbar-link {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: color 0.18s;
-  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  color: rgba(250, 247, 242, 0.85);
+  transition: color 0.2s var(--ease-smooth);
+  position: relative;
 }
 
-.navbar-links a:hover {
-  color: #e8961a;
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-gold);
+  transition: width 0.25s var(--ease-spring);
+}
+
+.navbar-link:hover {
+  color: var(--color-gold);
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+.navbar.is-scrolled .navbar-link {
+  color: var(--color-muted);
+}
+
+.navbar.is-scrolled .navbar-link:hover {
+  color: var(--color-blue-cobalt);
+}
+
+.navbar.is-scrolled .navbar-link::after {
+  background: var(--color-blue-cobalt);
+}
+
+/* ── Hamburger: proportioneel aan de 88px balk ──────────────── */
+.navbar.is-scrolled .navbar-hamburger {
+  color: var(--color-dark);
+}
+
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(250, 247, 242, 0.90);
+  transition: color 0.4s;
+}
+
+.ham-line {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transition:
+    transform 0.35s var(--ease-spring),
+    opacity 0.25s var(--ease-smooth);
+  transform-origin: center;
+}
+
+.navbar-hamburger.is-open .ham-line:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+}
+
+.navbar-hamburger.is-open .ham-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.navbar-hamburger.is-open .ham-line:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ── Mobiel menu overlay ─────────────────────────────────────── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(250, 247, 242, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-menu-link {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 400;
+  color: var(--color-blue-cobalt);
+  letter-spacing: -0.01em;
+  padding: 10px 24px;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: menuLinkIn 0.45s var(--ease-spring) forwards;
+  transition: color 0.2s;
+}
+
+.mobile-menu-link:hover {
+  color: var(--color-gold);
+}
+
+@keyframes menuLinkIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Logo overflow-fix: intermediaire breedte ───────────────── */
+@media (min-width: 768px) and (max-width: 900px) {
+  .navbar-brand {
+    margin-left: -24px;
+  }
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-hamburger {
+    display: flex;
+  }
+
+  .navbar-bar {
+    height: 84px;
+  }
+
+  .navbar-brand {
+    margin-top: 0;
+    margin-left: -8px;
+  }
+
+  .navbar-brand-logo {
+    height: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navbar-brand,
+  .navbar-link,
+  .navbar-hamburger,
+  .ham-line {
+    transition: none;
+  }
+
+  .mobile-menu-link {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }

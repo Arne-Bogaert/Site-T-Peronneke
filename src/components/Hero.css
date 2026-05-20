@@ -1,82 +1,190 @@
-.hero-section {
+.hero {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-.hero-image {
+/* ── Achtergrond — geen blur: interieur mag gezien worden ─── */
+.hero-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.48;
+  object-position: center;
 }
 
+/* ── Overlay: drie lagen voor leesbaarheid + merkkleur ──── */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(6, 5, 3, 0.60) 0%, transparent 40%, rgba(6, 5, 3, 0.75) 100%),
-    linear-gradient(to right, rgba(6, 5, 3, 0.45) 0%, transparent 65%);
+    radial-gradient(
+      ellipse 70% 60% at 50% 54%,
+      rgba(26, 28, 46, 0.52) 0%,
+      rgba(26, 28, 46, 0.88) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(26, 28, 46, 0.75) 0%,
+      rgba(26, 28, 46, 0.00) 22%
+    ),
+    linear-gradient(
+      to top,
+      rgba(26, 74, 138, 0.72) 0%,
+      rgba(26, 74, 138, 0.00) 38%
+    );
 }
 
+/* ── Trein: zit in de hero zodat hij meescrollt ─────────── */
+.hero-train {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* ── Inhoud: gecentreerd, iets boven het midden ─────────── */
 .hero-content {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
   text-align: center;
-  padding: 0 24px;
+  padding: 0 clamp(20px, 4vw, 40px);
+  margin-top: -48px;
 }
 
-.hero-logo {
-  width: clamp(180px, 38vw, 340px);
-  height: auto;
-  object-fit: contain;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 4px 32px rgba(0, 0, 0, 0.5));
-  margin-bottom: 8px;
-  opacity: 0;
-  animation: fadeSlideUp 1.2s ease-out forwards 1.6s;
-}
-
-.hero-welkom {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: clamp(0.8rem, 2.2vw, 1.15rem);
-  font-weight: 300;
-  letter-spacing: 0.55em;
+/* ── Eyebrow ─────────────────────────────────────────────── */
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(232, 160, 40, 0.90);
+  color: rgba(250, 247, 242, 0.62);
+  margin-bottom: 18px;
   opacity: 0;
-  animation: fadeSlideUp 1s ease-out forwards 2.3s;
+  transform: translateY(12px);
+  animation: heroFadeUp 0.7s var(--ease-spring) forwards;
+  animation-delay: 0.2s;
 }
 
-.hero-name {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(2.8rem, 9vw, 7rem);
+/* ── Headline ────────────────────────────────────────────── */
+.hero-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 7vw, 5rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.01em;
-  color: #fff;
-  text-shadow: 0 4px 48px rgba(0, 0, 0, 0.55);
+  color: rgba(250, 247, 242, 0.97);
+  text-shadow: 0 2px 40px rgba(26, 28, 46, 0.45);
+  margin-bottom: 16px;
+  max-width: 20ch;
   opacity: 0;
-  animation: fadeSlideUp 1.3s ease-out forwards 2.9s;
+  transform: translateY(18px);
+  animation: heroFadeUp 0.9s var(--ease-spring) forwards;
+  animation-delay: 0.4s;
 }
 
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
+/* ── Subline ─────────────────────────────────────────────── */
+.hero-subline {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  color: rgba(250, 247, 242, 0.72);
+  margin-bottom: 36px;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: heroFadeUp 0.8s var(--ease-spring) forwards;
+  animation-delay: 0.55s;
+}
+
+/* ── CTA: ghost button met gouden rand ──────────────────── */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(250, 247, 242, 0.92);
+  border: 1.5px solid var(--color-gold);
+  border-radius: 3px;
+  transition:
+    background 0.2s var(--ease-smooth),
+    color      0.2s var(--ease-smooth),
+    transform  0.2s var(--ease-smooth);
+  opacity: 0;
+  animation: heroCTAIn 0.75s var(--ease-spring) forwards;
+  animation-delay: 0.65s;
+}
+
+.hero-cta:hover {
+  background: var(--color-gold);
+  color: var(--color-dark);
+  transform: translateY(-1px);
+}
+
+.hero-cta:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* ── Keyframes ───────────────────────────────────────────── */
+@keyframes heroFadeUp {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes heroCTAIn {
+  to { opacity: 1; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow,
+  .hero-headline,
+  .hero-subline,
+  .hero-cta {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Trein: mobiele offset (navbar-balk 84px) ────────────── */
+@media (max-width: 767px) {
+  .hero-train {
+    top: 84px;
+  }
+}
+
+/* ── Tablet: margin-top terugschroeven ───────────────────── */
+@media (max-width: 767px) {
+  .hero-content {
+    margin-top: -24px;
+  }
+}
+
+/* ── Mobiel ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hero-content {
+    margin-top: 0;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .hero-headline {
+    max-width: 100%;
   }
 }
