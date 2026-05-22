@@ -1,4 +1,4 @@
-# Zelf te doen — 't Perron website
+   # Zelf te doen — 't Perron website
 
 Stappen die je zelf uitvoert nadat Claude de code heeft gebouwd en je alles naar GitHub hebt gepusht.
 Geen code nodig — alleen klikken in Netlify.
