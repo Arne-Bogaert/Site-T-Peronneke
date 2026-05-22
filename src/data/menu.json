@@ -1,48 +1,222 @@
 {
   "gerechten": [
-    { "naam": "Verse dagsoep met brood", "prijs": "7,00", "populair": false },
-    { "naam": "Uitsmijter", "prijs": "13,00", "populair": false },
-    { "naam": "Balletjes in tomatensaus en puree", "prijs": "24,00", "populair": false },
-    { "naam": "Vol-au-vent met puree en pasteitje", "prijs": "24,00", "populair": false },
-    { "naam": "Toast met brie, appel, honing en noten", "prijs": "16,00", "populair": false },
-    { "naam": "Toast met zalm, kruidenkaas en spiegelei", "prijs": "18,00", "populair": false },
-    { "naam": "Bagel met hummus en warme kipfilet", "prijs": "15,00", "populair": false },
-    { "naam": "Bagel Croque Monsieur", "prijs": "14,00", "populair": true },
-    { "naam": "Bagel Croque Madame", "prijs": "15,00", "populair": false },
-    { "naam": "Bagel Croque 't Perron", "prijs": "18,00", "populair": false },
-    { "naam": "Ceasar Salade", "prijs": "23,00", "populair": false },
-    { "naam": "Salade Geitekaas & Appel", "prijs": "24,00", "populair": false }
+    {
+      "naam": "Verse dagsoep met brood",
+      "prijs": "7,00",
+      "populair": false
+    },
+    {
+      "naam": "Uitsmijter",
+      "prijs": "13,00",
+      "populair": false
+    },
+    {
+      "naam": "Balletjes in tomatensaus en puree",
+      "prijs": "24,00",
+      "populair": false
+    },
+    {
+      "naam": "Vol-au-vent met puree en pasteitje",
+      "prijs": "24,00",
+      "populair": false
+    },
+    {
+      "naam": "Toast met brie, appel, honing en noten",
+      "prijs": "16,00",
+      "populair": false
+    },
+    {
+      "naam": "Toast met zalm, kruidenkaas en spiegelei",
+      "prijs": "18,00",
+      "populair": false
+    },
+    {
+      "naam": "Bagel met hummus en warme kipfilet",
+      "prijs": "15,00",
+      "populair": false
+    },
+    {
+      "naam": "Bagel Croque Monsieur",
+      "prijs": "14,00",
+      "populair": true
+    },
+    {
+      "naam": "Bagel Croque Madame",
+      "prijs": "15,00",
+      "populair": false
+    },
+    {
+      "naam": "Bagel Croque 't Perron",
+      "prijs": "18,00",
+      "populair": false
+    },
+    {
+      "naam": "Ceasar Salade",
+      "prijs": "23,00",
+      "populair": false
+    },
+    {
+      "naam": "Salade Geitekaas & Appel",
+      "prijs": "24,00",
+      "populair": false
+    },
+    {
+      "populair": false,
+      "naam": "TestGerecht",
+      "prijs": "15,00"
+    }
   ],
   "gerechten_kids": [
-    { "naam": "Kinder Spaghetti bolognaise", "prijs": "12,00", "populair": false },
-    { "naam": "Balletjes in tomatensaus en puree", "prijs": "12,00", "populair": false },
-    { "naam": "Vol-au-vent met puree en pasteitje", "prijs": "12,00", "populair": false }
+    {
+      "naam": "Kinder Spaghetti bolognaise",
+      "prijs": "12,00",
+      "populair": false
+    },
+    {
+      "naam": "Balletjes in tomatensaus en puree",
+      "prijs": "12,00",
+      "populair": false
+    },
+    {
+      "naam": "Vol-au-vent met puree en pasteitje",
+      "prijs": "12,00",
+      "populair": false
+    },
+    {
+      "populair": false,
+      "naam": "Testkinderen",
+      "prijs": "12,00"
+    }
   ],
   "ontbijt": [
-    { "naam": "Koffiekoek", "prijs": "3,00", "populair": true },
-    { "naam": "Yoghurt met granola en vers fruit", "prijs": "9,00", "populair": false },
-    { "naam": "Belegde pistolet (kaas of hesp of serrano)", "prijs": "5,00", "populair": false },
-    { "naam": "Boterham met spek & eieren", "prijs": "13,00", "populair": false },
-    { "naam": "Brood met 2 spiegelei", "prijs": "10,00", "populair": false },
-    { "naam": "Bagel met spek & eieren", "prijs": "13,00", "populair": false },
-    { "naam": "Bagel perdu (wentelteefje bagel met vers fruit)", "prijs": "14,00", "populair": false }
+    {
+      "naam": "Koffiekoek",
+      "prijs": "3,00",
+      "populair": true
+    },
+    {
+      "naam": "Yoghurt met granola en vers fruit",
+      "prijs": "9,00",
+      "populair": false
+    },
+    {
+      "naam": "Belegde pistolet (kaas of hesp of serrano)",
+      "prijs": "5,00",
+      "populair": false
+    },
+    {
+      "naam": "Boterham met spek & eieren",
+      "prijs": "13,00",
+      "populair": false
+    },
+    {
+      "naam": "Brood met 2 spiegelei",
+      "prijs": "10,00",
+      "populair": false
+    },
+    {
+      "naam": "Bagel met spek & eieren",
+      "prijs": "13,00",
+      "populair": false
+    },
+    {
+      "naam": "Bagel perdu (wentelteefje bagel met vers fruit)",
+      "prijs": "14,00",
+      "populair": false
+    },
+    {
+      "populair": false,
+      "naam": "testontbijt",
+      "prijs": "9,00"
+    }
   ],
   "formules": [
-    { "naam": "Bagel Ontbijt", "prijs": "17,00", "populair": true, "beschrijving": "Koffiekoek, bagel perdu en thee of koffie naar keuze" },
-    { "naam": "Klein Ontbijt", "prijs": "15,00", "populair": false, "beschrijving": "Koffiekoek, assortiment broodjes en charcuterie, yoghurt met granola en vers fruit en een thee of koffie naar keuze" },
-    { "naam": "Luxe Ontbijt", "prijs": "30,00", "populair": false, "beschrijving": "Koffiekoek, assortiment broodjes en charcuterie, yoghurt met granola en vers fruit, toast met kruidenkaas-zalm-spiegelei, vers geperst fruitsap, glaasje cava en thee of koffie naar keuze" },
-    { "naam": "Kinder Ontbijt", "prijs": "9,50", "populair": false, "beschrijving": "Boterham met Nutella en banaan, vers geperst fruitsap of aardbeidrink of chocomelk naar keuze" }
+    {
+      "naam": "Bagel Ontbijt",
+      "prijs": "17,00",
+      "populair": true,
+      "beschrijving": "Koffiekoek, bagel perdu en thee of koffie naar keuze"
+    },
+    {
+      "naam": "Klein Ontbijt",
+      "prijs": "15,00",
+      "populair": false,
+      "beschrijving": "Koffiekoek, assortiment broodjes en charcuterie, yoghurt met granola en vers fruit en een thee of koffie naar keuze"
+    },
+    {
+      "naam": "Luxe Ontbijt",
+      "prijs": "30,00",
+      "populair": false,
+      "beschrijving": "Koffiekoek, assortiment broodjes en charcuterie, yoghurt met granola en vers fruit, toast met kruidenkaas-zalm-spiegelei, vers geperst fruitsap, glaasje cava en thee of koffie naar keuze"
+    },
+    {
+      "naam": "Kinder Ontbijt",
+      "prijs": "9,50",
+      "populair": false,
+      "beschrijving": "Boterham met Nutella en banaan, vers geperst fruitsap of aardbeidrink of chocomelk naar keuze"
+    },
+    {
+      "populair": true,
+      "naam": "testformule",
+      "prijs": "17,00",
+      "beschrijving": "spaghetti met chorizo en bloemkool"
+    }
   ],
   "desserten": [
-    { "naam": "Tiramisu 't Perron", "prijs": "7,00", "populair": false },
-    { "naam": "Stuk taart", "prijs": "7,00", "populair": true },
-    { "naam": "Mattentaart", "prijs": "5,00", "populair": false },
-    { "naam": "Warme appeltaart met slagroom", "prijs": "8,50", "populair": false },
-    { "naam": "Warme appeltaart met vanille-ijs", "prijs": "11,00", "populair": false },
-    { "naam": "Warme appeltaart met vanille-ijs en slagroom", "prijs": "12,00", "populair": false },
-    { "naam": "Warme appeltaart met vanille-ijs, slagroom en caramelsaus", "prijs": "12,50", "populair": false },
-    { "naam": "Pure Chocolademousse", "prijs": "9,00", "populair": false },
-    { "naam": "Witte Chocolademousse", "prijs": "9,00", "populair": false },
-    { "naam": "Mix chocolademousse", "prijs": "9,00", "populair": false }
+    {
+      "naam": "Tiramisu 't Perron",
+      "prijs": "7,00",
+      "populair": false
+    },
+    {
+      "naam": "Stuk taart",
+      "prijs": "7,00",
+      "populair": true
+    },
+    {
+      "naam": "Mattentaart",
+      "prijs": "5,00",
+      "populair": false
+    },
+    {
+      "naam": "Warme appeltaart met slagroom",
+      "prijs": "8,50",
+      "populair": false
+    },
+    {
+      "naam": "Warme appeltaart met vanille-ijs",
+      "prijs": "11,00",
+      "populair": false
+    },
+    {
+      "naam": "Warme appeltaart met vanille-ijs en slagroom",
+      "prijs": "12,00",
+      "populair": false
+    },
+    {
+      "naam": "Warme appeltaart met vanille-ijs, slagroom en caramelsaus",
+      "prijs": "12,50",
+      "populair": false
+    },
+    {
+      "naam": "Pure Chocolademousse",
+      "prijs": "9,00",
+      "populair": false
+    },
+    {
+      "naam": "Witte Chocolademousse",
+      "prijs": "9,00",
+      "populair": false
+    },
+    {
+      "naam": "Mix chocolademousse",
+      "prijs": "9,00",
+      "populair": false
+    },
+    {
+      "populair": true,
+      "naam": "Tiramisu van Arne",
+      "prijs": "7,00"
+    }
   ]
 }
