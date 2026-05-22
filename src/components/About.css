@@ -2,8 +2,9 @@
 .about {
   background:
     linear-gradient(to bottom, rgba(26, 28, 46, 0.22) 0%, rgba(26, 28, 46, 0) 120px),
-    #EDE9E1;
+    var(--color-cream-warm);
   padding: var(--space-section-v) var(--space-section-h);
+  scroll-margin-top: 100px;
 }
 
 .about-inner {
@@ -35,7 +36,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-gold);
+  color: var(--color-blue-cobalt);
   margin-bottom: 20px;
 }
 
@@ -53,7 +54,7 @@
 .about-body {
   font-family: var(--font-body);
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.65;
   color: var(--color-dark);
   max-width: 58ch;
   margin-bottom: 20px;
@@ -68,6 +69,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--color-dark);
+  border-radius: 6px;
+  padding: clamp(32px, 4vw, 48px);
 }
 
 .about-parrot {
@@ -116,12 +120,16 @@
 /* ── Tablet / desktop split ───────────────────────────────── */
 @media (min-width: 768px) {
   .about-visual {
-    justify-content: flex-end;
+    justify-content: center;
   }
 }
 
 /* ── Mobiel ───────────────────────────────────────────────── */
 @media (max-width: 767px) {
+  .about {
+    scroll-margin-top: 84px;
+  }
+
   .about-inner {
     grid-template-columns: 1fr;
     gap: 32px;

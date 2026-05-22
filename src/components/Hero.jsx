@@ -4,7 +4,7 @@ import './Hero.css'
 
 export default function Hero() {
   return (
-    <section id="main-content" className="hero" aria-label="Welkom bij 't Perroneke">
+    <section id="main-content" className="hero" aria-label="Welkom bij 't Perroneke" tabIndex={-1}>
       <img
         src={interiorImg}
         alt=""
@@ -19,7 +19,7 @@ export default function Hero() {
 
       <div className="hero-content">
         <p className="hero-eyebrow">Koffiebar &amp; eethuis · Schendelbeke</p>
-        <h1 className="hero-headline">Welkom in 'T Perroneke</h1>
+        <h1 className="hero-headline">Welkom in 't Perroneke</h1>
         <p className="hero-subline">Koffie, eten en rust naast het spoor</p>
         <a href="#over-ons" className="hero-cta">
           Ontdek 't Perron

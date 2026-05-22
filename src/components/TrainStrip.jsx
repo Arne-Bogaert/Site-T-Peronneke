@@ -6,9 +6,12 @@ import car9Gif       from '../assets/train/carriage_v18_car9.gif'
 import railtrackImg  from '../assets/train/railtrack_v1.png'
 import './TrainStrip.css'
 
-export default function TrainStrip() {
+export default function TrainStrip({ noTrack = false }) {
   return (
-    <div className="train-strip" aria-hidden="true">
+    <div
+      className={`train-strip${noTrack ? ' train-strip--no-track' : ''}`}
+      aria-hidden="true"
+    >
       <div className="train-group">
         {/* Rijtuigen vooraan, locomotief achteraan (rijrichting rechts) */}
         <img src={car9Gif}       alt="" className="train-img" />
@@ -17,10 +20,12 @@ export default function TrainStrip() {
         <img src={car1Gif}       alt="" className="train-img" />
         <img src={locomotiefGif} alt="" className="train-img train-loco" />
       </div>
-      <div
-        className="train-track"
-        style={{ backgroundImage: `url(${railtrackImg})` }}
-      />
+      {!noTrack && (
+        <div
+          className="train-track"
+          style={{ backgroundImage: `url(${railtrackImg})` }}
+        />
+      )}
     </div>
   )
 }

@@ -1,0 +1,224 @@
+/* ── Menu ──────────────────────────────────────────────────── */
+/* Gradient top absorbs the TrainStrip→Menu naad: cream-warm fades into dark */
+.menu {
+  background:
+    linear-gradient(to bottom, var(--color-cream-warm) 0%, var(--color-dark) 96px),
+    var(--color-dark);
+  padding: var(--space-section-v) var(--space-section-h);
+  scroll-margin-top: 100px;
+}
+
+.menu-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Sectie header ────────────────────────────────────────── */
+.menu-hd {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.menu-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+.menu-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-cream-warm);
+  text-wrap: balance;
+  margin-bottom: 16px;
+}
+
+.menu-title-bar {
+  width: 48px;
+  height: 3px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+}
+
+/* ── Categorie blok ───────────────────────────────────────── */
+.menu-cat {
+  background: var(--color-cream-warm);
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 4px;
+}
+
+.menu-cat-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-blue-cobalt);
+  text-wrap: balance;
+}
+
+.menu-cat-title::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--color-gold);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.menu-cat-note {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.menu-sub-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(87, 100, 127, 0.18);
+}
+
+/* ── Item lijst ───────────────────────────────────────────── */
+.menu-items {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+}
+
+.menu-items--kids {
+  margin-top: 12px;
+}
+
+.menu-item {
+  padding: 8px 0;
+}
+
+.menu-item + .menu-item {
+  border-top: 1px solid rgba(87, 100, 127, 0.14);
+}
+
+/* ── Item rij: naam ........ prijs ────────────────────────── */
+.menu-item-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.menu-item-name {
+  flex: 0 1 auto;
+  font-size: 0.925rem;
+  color: var(--color-dark);
+  line-height: 1.4;
+  padding-bottom: 3px;
+}
+
+.menu-item-fill {
+  flex: 1 1 0;
+  min-width: 12px;
+  border-bottom: 1.5px dotted rgba(87, 100, 127, 0.38);
+  margin: 0 6px;
+}
+
+.menu-item-price {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  line-height: 1.4;
+  padding-bottom: 3px;
+}
+
+/* ── Populaire items ──────────────────────────────────────── */
+.menu-item--pop .menu-item-name {
+  color: var(--color-blue-cobalt);
+  font-weight: 500;
+}
+
+.menu-item--pop .menu-item-price {
+  color: var(--color-blue-cobalt);
+  font-weight: 600;
+}
+
+.menu-star {
+  display: inline-block;
+  color: var(--color-gold);
+  font-size: 0.72em;
+  margin-left: 4px;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* ── Formule beschrijving ─────────────────────────────────── */
+.menu-item-desc {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-style: italic;
+  line-height: 1.55;
+  margin-top: 5px;
+  max-width: 52ch;
+}
+
+/* ── Scroll reveal ────────────────────────────────────────── */
+.menu-hd,
+.menu-cat {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity  0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.menu--visible .menu-hd,
+.menu--visible .menu-cat {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .menu-hd,
+  .menu-cat {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Mobiel ───────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .menu {
+    scroll-margin-top: 84px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-cat {
+    padding: 20px;
+  }
+}

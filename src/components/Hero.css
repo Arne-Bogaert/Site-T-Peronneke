@@ -110,6 +110,7 @@
 .hero-cta {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
   padding: 14px 32px;
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -162,15 +163,12 @@
   }
 }
 
-/* ── Trein: mobiele offset (navbar-balk 84px) ────────────── */
+/* ── Mobiele aanpassingen ────────────────────────────────── */
 @media (max-width: 767px) {
   .hero-train {
     top: 84px;
   }
-}
 
-/* ── Tablet: margin-top terugschroeven ───────────────────── */
-@media (max-width: 767px) {
   .hero-content {
     margin-top: -24px;
   }

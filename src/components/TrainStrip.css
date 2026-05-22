@@ -44,6 +44,16 @@
   to   { transform: translateX(110vw); }
 }
 
+/* No-track variant: geen rails, trein rijdt op sectiongrens */
+.train-strip--no-track {
+  height: 37px;
+  background: var(--color-cream-warm);
+}
+
+.train-strip--no-track .train-group {
+  bottom: 0;
+}
+
 /* Bij reduced motion: trein verdwijnt, railtrack blijft */
 @media (prefers-reduced-motion: reduce) {
   .train-group {

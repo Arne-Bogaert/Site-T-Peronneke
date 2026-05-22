@@ -8,7 +8,7 @@
     <meta name="description" content="'t Perron is een gezellige koffiebar & eethuis naast het station van Schendelbeke. Lekker ontbijt, lunch en koffie van Eddy en Sabrina." />
     <meta property="og:title" content="'t Perron — Koffiebar & Eethuis" />
     <meta property="og:description" content="Gezellige koffiebar & eethuis aan het station van Schendelbeke. Ontbijt, lunch, koffie — iedereen welkom." />
-    <meta property="og:type" content="restaurant" />
+    <meta property="og:type" content="website" />
     <meta property="og:locale" content="nl_BE" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,6 +16,18 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap"
       rel="stylesheet"
     />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', function(user) {
+          if (!user) {
+            window.netlifyIdentity.on('login', function() {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -73,7 +73,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(o => !o)}
           aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
           aria-expanded={menuOpen}
-          aria-controls={menuOpen ? 'mobile-nav' : undefined}
+          aria-controls="mobile-nav"
         >
           <span className="ham-line" />
           <span className="ham-line" />

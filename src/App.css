@@ -15,4 +15,6 @@
 
 .skip-link:focus {
   left: 16px;
+  outline: 2px solid var(--color-dark);
+  outline-offset: 3px;
 }

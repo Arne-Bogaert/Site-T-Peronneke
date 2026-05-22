@@ -1,0 +1,65 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: nl
+
+collections:
+  - name: menu
+    label: Menukaart
+    files:
+      - name: menukaart
+        label: Menukaart bewerken
+        file: src/data/menu.json
+        format: json
+        fields:
+          - label: Gerechten
+            name: gerechten
+            widget: list
+            label_singular: Gerecht
+            summary: "{{fields.naam}} — € {{fields.prijs}}"
+            fields:
+              - { label: Naam, name: naam, widget: string }
+              - { label: "Prijs (bijv. 13,00 — zonder €)", name: prijs, widget: string }
+              - { label: "Populair (wordt gemarkeerd met ★)", name: populair, widget: boolean, default: false, required: false }
+
+          - label: Gerechten voor kids
+            name: gerechten_kids
+            widget: list
+            label_singular: Kindergerecht
+            summary: "{{fields.naam}} — € {{fields.prijs}}"
+            fields:
+              - { label: Naam, name: naam, widget: string }
+              - { label: "Prijs (bijv. 12,00 — zonder €)", name: prijs, widget: string }
+              - { label: "Populair (wordt gemarkeerd met ★)", name: populair, widget: boolean, default: false, required: false }
+
+          - label: Ontbijt
+            name: ontbijt
+            widget: list
+            label_singular: Ontbijtitem
+            summary: "{{fields.naam}} — € {{fields.prijs}}"
+            fields:
+              - { label: Naam, name: naam, widget: string }
+              - { label: "Prijs (bijv. 9,00 — zonder €)", name: prijs, widget: string }
+              - { label: "Populair (wordt gemarkeerd met ★)", name: populair, widget: boolean, default: false, required: false }
+
+          - label: Formules
+            name: formules
+            widget: list
+            label_singular: Formule
+            summary: "{{fields.naam}} — € {{fields.prijs}}"
+            fields:
+              - { label: Naam, name: naam, widget: string }
+              - { label: "Prijs (bijv. 17,00 — zonder €)", name: prijs, widget: string }
+              - { label: Beschrijving, name: beschrijving, widget: text }
+              - { label: "Populair (wordt gemarkeerd met ★)", name: populair, widget: boolean, default: false, required: false }
+
+          - label: Desserten
+            name: desserten
+            widget: list
+            label_singular: Dessert
+            summary: "{{fields.naam}} — € {{fields.prijs}}"
+            fields:
+              - { label: Naam, name: naam, widget: string }
+              - { label: "Prijs (bijv. 7,00 — zonder €)", name: prijs, widget: string }
+              - { label: "Populair (wordt gemarkeerd met ★)", name: populair, widget: boolean, default: false, required: false }

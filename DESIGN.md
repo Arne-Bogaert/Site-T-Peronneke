@@ -101,17 +101,18 @@ Rechtstreeks afgeleid van het logo. Alle kleuren als CSS custom properties in `s
 
 **Paginastructuur (éénpagina):**
 ```
-Hero (foto fullscreen)
-  ↓  [treinstrip]
-Over Ons
-  ↓  [treinstrip]
+Hero (foto fullscreen)  ← TrainStrip zit BINNEN Hero (position: absolute, top: 100px)
+Over Ons                ← gradient-overgang (geen losstaande TrainStrip)
+  ↓  [treinstrip — te beslissen per sectie]
 Menu
-  ↓  [treinstrip]
+  ↓  [treinstrip — te beslissen per sectie]
 Locatie & Openingsuren
-  ↓  [treinstrip]
+  ↓  [treinstrip — te beslissen per sectie]
 Contact
 Footer
 ```
+
+**Nota TrainStrip:** De component is herbruikbaar maar wordt niet automatisch tussen elke sectie gezet. Tussen Hero en About werd de strip visueel te licht bevonden en vervangen door een gradient op de About-achtergrond. Per nieuwe sectie beslis je of een strip past.
 
 **Grid:**
 - Mobiel: 1 kolom, padding `20px`
@@ -148,8 +149,9 @@ Assets in `src/assets/train/`:
 | `railtrack_v1.png` | Railspoor (tileable horizontale strip) |
 
 **Integratie (subtiele strip):**
-- Herbruikbare `<TrainStrip />` component tussen secties
-- Trein en rijtuigen rijden via CSS keyframe animatie van **links naar rechts** (`translateX(-100%)` → `translateX(110vw)`)
+
+- Herbruikbare `<TrainStrip />` component — plaatsing per sectie beslissen (zie paginastructuur nota)
+- Trein rijdt via CSS keyframe animatie van **links naar rechts** (`translateX(-100%)` → `translateX(110vw)`)
 - Railtrack als tileable `background-image` in een vaste-hoogte strip
 - Pixel art schaal: **uitsluitend 2× of 3×** — nooit fractional (voorkomt blur)
 - `prefers-reduced-motion`: trein staat stil, railtrack blijft zichtbaar
@@ -171,7 +173,7 @@ Assets in `src/assets/train/`:
 |---|---|
 | Scroll reveal | Fade + translateY(20px→0), ~0.65s ease-out, drempel 8% |
 | Hover links/knoppen | Kleurverandering of underline, 0.15s ease |
-| Trein | Lineaire CSS keyframe, rijdt continu van rechts naar links |
+| Trein | Lineaire CSS keyframe, rijdt continu van links naar rechts |
 | Geen | Parallax, zware GSAP sequences, laadanimaties, scale-hover |
 
 Altijd `@media (prefers-reduced-motion: reduce)` voorzien voor alle animaties.
@@ -209,7 +211,7 @@ src/
     Hero.jsx / Hero.css             ✅ gebouwd
     Navbar.jsx / Navbar.css         ✅ gebouwd
     TrainStrip.jsx / TrainStrip.css ✅ gebouwd — herbruikbare treinscheidingslijn
-    About.jsx / About.css           ⏳ te bouwen
+    About.jsx / About.css           ✅ gebouwd
     MenuBook.jsx / MenuBook.css     ⏳ te bouwen
     Locatie.jsx / Locatie.css       ⏳ te bouwen
     Contact.jsx / Contact.css       ⏳ te bouwen
