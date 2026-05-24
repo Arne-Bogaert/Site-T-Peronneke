@@ -6,6 +6,7 @@
   --color-blue-navy:   #1A4A8A;
   --color-blue-sky:    #3D92CC;
   --color-gold:        #F5A520;
+  --color-gold-rgb:    245, 165, 32;
   --color-amber:       #D97010;
 
   /* Neutrals */
@@ -14,6 +15,18 @@
   --color-white: #FFFFFF;
   --color-dark:  #1A1C2E;
   --color-muted: #57647F;
+
+  /* Status */
+  --color-open:        #1a5c2e;
+  --color-open-bg:     #d4edda;
+  --color-open-rgb:    26, 92, 46;
+
+  /* RGB channels — gebruik als rgba(var(--token-rgb), opacity) */
+  --color-dark-rgb:        26, 28, 46;
+  --color-cream-rgb:       250, 247, 242;
+  --color-blue-navy-rgb:   26, 74, 138;
+  --color-blue-cobalt-rgb: 36, 97, 168;
+  --color-muted-rgb:       87, 100, 127;
 
   /* Typography */
   --font-heading: 'Fraunces', Georgia, serif;
@@ -35,8 +48,10 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -67,4 +82,17 @@ a {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
   border-radius: 3px;
+}
+
+/* ── Utility ─────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

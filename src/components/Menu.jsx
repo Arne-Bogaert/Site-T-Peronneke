@@ -53,14 +53,22 @@ export default function Menu() {
       <div className="menu-inner">
 
         <header className="menu-hd" style={{ '--i': 0 }}>
-          <span className="menu-eyebrow">Menu</span>
+          <span className="menu-eyebrow">Eten &amp; Drinken</span>
           <h2 id="menu-heading" className="menu-title">Ons Menu</h2>
           <div className="menu-title-bar" aria-hidden="true" />
         </header>
 
+        <nav className="menu-cat-nav" aria-label="Springnavigatie menukaart" style={{ '--i': 0.5 }}>
+          {['Gerechten', 'Ontbijt', 'Formules', 'Desserten'].map(cat => (
+            <a key={cat} href={`#menu-${cat.toLowerCase()}`} className="menu-cat-nav-link">
+              {cat}
+            </a>
+          ))}
+        </nav>
+
         <div className="menu-grid">
 
-          <div className="menu-cat" style={{ '--i': 1 }}>
+          <div className="menu-cat" id="menu-gerechten" style={{ '--i': 1 }}>
             <h3 className="menu-cat-title">Gerechten</h3>
             <p className="menu-cat-note">Keuken doorlopend open tot 19u30</p>
             <ul className="menu-items" role="list">
@@ -76,7 +84,7 @@ export default function Menu() {
             </ul>
           </div>
 
-          <div className="menu-cat" style={{ '--i': 2 }}>
+          <div className="menu-cat" id="menu-ontbijt" style={{ '--i': 2 }}>
             <h3 className="menu-cat-title">Ontbijt</h3>
             <ul className="menu-items" role="list">
               {menuData.ontbijt.map((item, i) => (
@@ -85,7 +93,7 @@ export default function Menu() {
             </ul>
           </div>
 
-          <div className="menu-cat" style={{ '--i': 3 }}>
+          <div className="menu-cat" id="menu-formules" style={{ '--i': 3 }}>
             <h3 className="menu-cat-title">Formules</h3>
             <ul className="menu-items" role="list">
               {menuData.formules.map((item, i) => (
@@ -94,7 +102,7 @@ export default function Menu() {
             </ul>
           </div>
 
-          <div className="menu-cat" style={{ '--i': 4 }}>
+          <div className="menu-cat" id="menu-desserten" style={{ '--i': 4 }}>
             <h3 className="menu-cat-title">Desserten</h3>
             <ul className="menu-items" role="list">
               {menuData.desserten.map((item, i) => (

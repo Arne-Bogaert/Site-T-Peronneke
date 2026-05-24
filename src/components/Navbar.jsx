@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import fullLogoImg from "../assets/'T Perron Logo.png"
 import './Navbar.css'
 
@@ -12,6 +12,8 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+  const hamburgerRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -20,11 +22,28 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    const sections = NAV_LINKS
+      .map(link => document.querySelector(link.href))
+      .filter(Boolean)
+    if (!sections.length) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    )
+    sections.forEach(s => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  const close = () => setMenuOpen(false)
+  const close = () => { setMenuOpen(false); hamburgerRef.current?.focus() }
 
   useEffect(() => {
     if (!menuOpen) return
@@ -50,8 +69,7 @@ export default function Navbar() {
   }, [menuOpen])
 
   return (
-    <>
-<header className={`navbar${scrolled ? ' is-scrolled' : ''}`}>
+    <header className={`navbar${scrolled ? ' is-scrolled' : ''}`}>
       {/* Hoofdbalk */}
       <div className="navbar-bar">
         <a href="#" className="navbar-brand" aria-label="'t Perroneke — startpagina">
@@ -61,7 +79,11 @@ export default function Navbar() {
         {/* Desktop links */}
         <nav className="navbar-links" aria-label="Hoofdnavigatie">
           {NAV_LINKS.map(link => (
-            <a key={link.href} href={link.href} className="navbar-link">
+            <a
+              key={link.href}
+              href={link.href}
+              className={`navbar-link${link.href === '#' + activeSection ? ' is-active' : ''}`}
+            >
               {link.label}
             </a>
           ))}
@@ -69,6 +91,7 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
+          ref={hamburgerRef}
           className={`navbar-hamburger${menuOpen ? ' is-open' : ''}`}
           onClick={() => setMenuOpen(o => !o)}
           aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
@@ -84,6 +107,14 @@ export default function Navbar() {
       {/* Mobiel menu */}
       {menuOpen && (
         <div id="mobile-nav" className="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigatie">
+          <button
+            className="mobile-menu-close"
+            onClick={close}
+            aria-label="Menu sluiten"
+          >
+            <span className="mobile-close-line" />
+            <span className="mobile-close-line" />
+          </button>
           <nav className="mobile-menu-links">
             {NAV_LINKS.map((link, i) => (
               <a
@@ -99,7 +130,6 @@ export default function Navbar() {
           </nav>
         </div>
       )}
-      </header>
-    </>
+    </header>
   )
 }

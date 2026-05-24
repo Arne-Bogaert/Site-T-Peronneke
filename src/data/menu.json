@@ -1,70 +1,17 @@
 {
   "gerechten": [
-    {
-      "naam": "Verse dagsoep met brood",
-      "prijs": "7,00",
-      "populair": false
-    },
-    {
-      "naam": "Uitsmijter",
-      "prijs": "13,00",
-      "populair": false
-    },
-    {
-      "naam": "Balletjes in tomatensaus en puree",
-      "prijs": "24,00",
-      "populair": false
-    },
-    {
-      "naam": "Vol-au-vent met puree en pasteitje",
-      "prijs": "24,00",
-      "populair": false
-    },
-    {
-      "naam": "Toast met brie, appel, honing en noten",
-      "prijs": "16,00",
-      "populair": false
-    },
-    {
-      "naam": "Toast met zalm, kruidenkaas en spiegelei",
-      "prijs": "18,00",
-      "populair": false
-    },
-    {
-      "naam": "Bagel met hummus en warme kipfilet",
-      "prijs": "15,00",
-      "populair": false
-    },
-    {
-      "naam": "Bagel Croque Monsieur",
-      "prijs": "14,00",
-      "populair": true
-    },
-    {
-      "naam": "Bagel Croque Madame",
-      "prijs": "15,00",
-      "populair": false
-    },
-    {
-      "naam": "Bagel Croque 't Perron",
-      "prijs": "18,00",
-      "populair": false
-    },
-    {
-      "naam": "Ceasar Salade",
-      "prijs": "23,00",
-      "populair": false
-    },
-    {
-      "naam": "Salade Geitekaas & Appel",
-      "prijs": "24,00",
-      "populair": false
-    },
-    {
-      "populair": false,
-      "naam": "TestGerecht",
-      "prijs": "15,00"
-    }
+    { "naam": "Verse dagsoep met brood", "prijs": "7,00", "populair": false },
+    { "naam": "Uitsmijter", "prijs": "13,00", "populair": false },
+    { "naam": "Balletjes in tomatensaus en puree", "prijs": "24,00", "populair": false },
+    { "naam": "Vol-au-vent met puree en pasteitje", "prijs": "24,00", "populair": false },
+    { "naam": "Toast met brie, appel, honing en noten", "prijs": "16,00", "populair": false },
+    { "naam": "Toast met zalm, kruidenkaas en spiegelei", "prijs": "18,00", "populair": false },
+    { "naam": "Bagel met hummus en warme kipfilet", "prijs": "15,00", "populair": false },
+    { "naam": "Bagel Croque Monsieur", "prijs": "14,00", "populair": true },
+    { "naam": "Bagel Croque Madame", "prijs": "15,00", "populair": false },
+    { "naam": "Bagel Croque 't Perron", "prijs": "18,00", "populair": false },
+    { "naam": "Caesar Salade", "prijs": "23,00", "populair": false },
+    { "naam": "Salade Geitekaas & Appel", "prijs": "24,00", "populair": false }
   ],
   "gerechten_kids": [
     {

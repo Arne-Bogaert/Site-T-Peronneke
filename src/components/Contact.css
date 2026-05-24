@@ -1,0 +1,257 @@
+/* ── Contact ─────────────────────────────────────────────── */
+.contact {
+  background: var(--color-cream);
+  padding: var(--space-section-v) var(--space-section-h);
+  scroll-margin-top: 100px;
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(40px, 6vw, 56px);
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.contact-header {
+  text-align: center;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-accent {
+  width: 56px;
+  height: 4px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.contact-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-blue-cobalt);
+  margin-bottom: 20px;
+}
+
+.contact-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-blue-cobalt);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.contact-intro {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.contact-grid {
+  list-style: none;
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Telefoon (1ste item) staat vol breed — primair kanaal */
+.contact-grid-item:first-child {
+  grid-column: 1 / -1;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.contact-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  background: var(--color-white);
+  border: 1px solid rgba(var(--color-dark-rgb), 0.08);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--color-dark);
+  height: 100%;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow   0.2s ease,
+    transform    0.2s ease;
+}
+
+/* Kopieerbare kaarten: cursor signaleert de actie */
+.contact-card--copiable {
+  cursor: copy;
+}
+
+.contact-card:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 6px 24px rgba(var(--color-gold-rgb), 0.12);
+  transform: translateY(-2px);
+}
+
+.contact-card-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(var(--color-blue-cobalt-rgb), 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-blue-cobalt);
+}
+
+.contact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.contact-card-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  display: block;
+}
+
+.contact-card-value {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-card-arrow {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--color-muted);
+  opacity: 0.4;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.contact-card:hover .contact-card-arrow {
+  opacity: 1;
+  color: var(--color-blue-cobalt);
+  transform: translateX(3px);
+}
+
+.contact-card:hover .contact-card-arrow--clipboard {
+  transform: none;
+}
+
+.contact-card:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+
+/* ── Kopieer-toast ────────────────────────────────────────── */
+.contact-card-toast {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--color-dark-rgb), 0.88);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.contact-card.is-copied .contact-card-toast {
+  opacity: 1;
+}
+
+/* ── Scroll reveal ────────────────────────────────────────── */
+.contact-accent,
+.contact-label,
+.contact-title,
+.contact-intro {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.contact-grid-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(0.35s + var(--i, 0) * 0.09s);
+}
+
+.contact--visible .contact-accent,
+.contact--visible .contact-label,
+.contact--visible .contact-title,
+.contact--visible .contact-intro,
+.contact--visible .contact-grid-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .contact-accent,
+  .contact-label,
+  .contact-title,
+  .contact-intro,
+  .contact-grid-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Mobiel ───────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .contact {
+    scroll-margin-top: 84px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .contact-grid-item:first-child {
+    grid-column: auto;
+  }
+
+  .contact-card {
+    min-height: 64px;
+  }
+}

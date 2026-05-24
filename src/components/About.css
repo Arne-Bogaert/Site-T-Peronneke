@@ -1,7 +1,7 @@
 /* ── Over Ons ──────────────────────────────────────────────── */
 .about {
   background:
-    linear-gradient(to bottom, rgba(26, 28, 46, 0.22) 0%, rgba(26, 28, 46, 0) 120px),
+    linear-gradient(to bottom, rgba(var(--color-dark-rgb), 0.22) 0%, transparent 120px),
     var(--color-cream-warm);
   padding: var(--space-section-v) var(--space-section-h);
   scroll-margin-top: 100px;
@@ -66,19 +66,46 @@
 
 /* ── Visual kolom ─────────────────────────────────────────── */
 .about-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--color-dark);
   border-radius: 6px;
-  padding: clamp(32px, 4vw, 48px);
+  overflow: hidden;
 }
 
-.about-parrot {
-  width: clamp(160px, 26vw, 280px);
-  height: auto;
-  user-select: none;
-  pointer-events: none;
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Google Reviews link ──────────────────────────────────── */
+.about-reviews {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-blue-cobalt);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.about-reviews:hover {
+  color: var(--color-blue-navy);
+}
+
+.about-reviews:hover svg {
+  transform: translateX(3px);
+}
+
+.about-reviews svg {
+  transition: transform 0.15s ease;
+}
+
+.about-reviews-stars {
+  color: var(--color-gold);
+  letter-spacing: 1px;
 }
 
 /* ── Scroll reveal ────────────────────────────────────────── */
@@ -86,7 +113,8 @@
 .about-label,
 .about-pull,
 .about-body,
-.about-parrot {
+.about-reviews,
+.about-photo {
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -99,7 +127,8 @@
 .about--visible .about-label,
 .about--visible .about-pull,
 .about--visible .about-body,
-.about--visible .about-parrot {
+.about--visible .about-reviews,
+.about--visible .about-photo {
   opacity: 1;
   transform: translateY(0);
 }
@@ -110,7 +139,8 @@
   .about-label,
   .about-pull,
   .about-body,
-  .about-parrot {
+  .about-reviews,
+  .about-photo {
     opacity: 1;
     transform: none;
     transition: none;
@@ -137,11 +167,6 @@
 
   .about-visual {
     order: -1;
-    justify-content: center;
-  }
-
-  .about-parrot {
-    width: 180px;
   }
 
   .about-pull,

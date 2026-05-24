@@ -40,10 +40,18 @@ Rechtstreeks afgeleid van het logo. Alle kleuren als CSS custom properties in `s
 
 | Token | Hex | Gebruik |
 |---|---|---|
-| `--color-cream` | `#FAF7F2` | Pagina-achtergrond (hoofdthema) |
+| `--color-cream` | `#FAF7F2` | Pagina-achtergrond — Menu, Contact secties |
+| `--color-cream-warm` | `#EDE9E1` | Achtergrond — About, Locatie secties, navbar scrolled |
 | `--color-white` | `#FFFFFF` | Kaarten, modals, geëleveerde vlakken |
-| `--color-dark` | `#1A1C2E` | Hoofdtekst op lichte achtergronden |
+| `--color-dark` | `#1A1C2E` | Hoofdtekst, Footer achtergrond, CookieBanner achtergrond |
 | `--color-muted` | `#57647F` | Subtekst, metadata, labels (contrast 5.56:1 op crème — WCAG AA) |
+
+### Status kleuren
+
+| Token | Hex | Gebruik |
+|---|---|---|
+| `--color-open` | `#1a5c2e` | "Nu open" tekst, "Vandaag" badge bij open rij |
+| `--color-open-bg` | `#d4edda` | "Nu open" pill achtergrond |
 
 ### Pixel trein palet (decoratief)
 
@@ -101,18 +109,18 @@ Rechtstreeks afgeleid van het logo. Alle kleuren als CSS custom properties in `s
 
 **Paginastructuur (éénpagina):**
 ```
-Hero (foto fullscreen)  ← TrainStrip zit BINNEN Hero (position: absolute, top: 100px)
-Over Ons                ← gradient-overgang (geen losstaande TrainStrip)
-  ↓  [treinstrip — te beslissen per sectie]
-Menu
-  ↓  [treinstrip — te beslissen per sectie]
-Locatie & Openingsuren
-  ↓  [treinstrip — te beslissen per sectie]
-Contact
-Footer
+Hero (foto fullscreen)   ← TrainStrip BINNEN Hero (position: absolute, top: 100px)
+About (cream-warm)       ← gradient-overgang van donker boven; geen losse TrainStrip
+  ↓  <TrainStrip noTrack />   ← achtergrond: cream-warm (past als overgang)
+Menu (cream)
+Locatie (cream-warm)
+Contact (cream)
+Footer (dark)            ← donkere afsluitende balk, spiegelt hero-donker
 ```
 
-**Nota TrainStrip:** De component is herbruikbaar maar wordt niet automatisch tussen elke sectie gezet. Tussen Hero en About werd de strip visueel te licht bevonden en vervangen door een gradient op de About-achtergrond. Per nieuwe sectie beslis je of een strip past.
+**Sectie-achtergrond patroon:** cream-warm → cream → cream-warm → cream (afwisselend). Footer doorbreekt het patroon bewust met dark.
+
+**Nota TrainStrip:** De `noTrack` variant zit enkel als scheidingslijn tussen About en Menu. De standaard `<TrainStrip />` (met railtrack) zit enkel intern in Hero.
 
 **Grid:**
 - Mobiel: 1 kolom, padding `20px`
@@ -158,10 +166,10 @@ Assets in `src/assets/train/`:
 
 ### Foto's
 
-- Momenteel enkel: `src/assets/Foto_interieur.webp`
+- `src/assets/Foto_interieur.webp` — hero achtergrond (`fetchPriority="high"`, decoratief alt="")
+- `src/assets/Eddy en Sabrina.webp` — About sectie (`loading="lazy"`, alt="Eddy en Sabrina")
 - Altijd `object-fit: cover`, nooit uitgerekt
-- Hero overlay: kobaltblauw `#1A4A8A` op ~50% opacity wanneer tekst bovenop foto staat
-- `fetchpriority="high"` op het hero img element
+- Hero overlay: 3 lagen (radiale gradient + top-in + bottom kobaltblauw) voor leesbaarheid
 
 ---
 
@@ -171,10 +179,16 @@ Assets in `src/assets/train/`:
 
 | Element | Gedrag |
 |---|---|
-| Scroll reveal | Fade + translateY(20px→0), ~0.65s ease-out, drempel 8% |
-| Hover links/knoppen | Kleurverandering of underline, 0.15s ease |
+| Scroll reveal | Fade + translateY(20px→0), ~0.65s `cubic-bezier(0.16, 1, 0.3, 1)`, drempel 8% |
+| Stagger | `--i` prop op elk element, `transition-delay: calc(var(--i, 0) * 0.1s)` |
+| Hover links/knoppen | Kleurverandering of underline, 0.15–0.2s ease |
 | Trein | Lineaire CSS keyframe, rijdt continu van links naar rechts |
-| Geen | Parallax, zware GSAP sequences, laadanimaties, scale-hover |
+| Modal/overlay | Overlay: `opacity 0→1`, 0.25s. Modal: `translateY(16px) scale(0.98) → 0`, 0.35s |
+| Cookie banner | `translateY(100%) → 0`, 0.4s `cubic-bezier(0.16, 1, 0.3, 1)` |
+| Hamburger lijnen | `--ease-spring` (interactive toggle — enige uitzondering op expo-out regel) |
+| Geen | Parallax, bounce, elastic, laadanimaties, scale-hover, layout-property animaties |
+
+**Easing standard:** `cubic-bezier(0.16, 1, 0.3, 1)` (expo-out) voor alle entrance-animaties. `--ease-spring` enkel voor interactieve toggle-states (hamburger X-transformatie, nav underline).
 
 Altijd `@media (prefers-reduced-motion: reduce)` voorzien voor alle animaties.
 
@@ -204,21 +218,37 @@ src/
     train/                          ← pixel trein GIFs + railtrack
     'T Perron Logo.png              ← actief in navbar (transparant)
     'T Perron Logo.webp             ← beschikbaar als alternatief
-    'T Perron Korte Papegaai.png    ← actief (transparant)
+    'T Perron Korte Papegaai.png    ← decoratief (transparant)
     'T Perron Korte Papegaai.webp   ← beschikbaar als alternatief
-    Foto_interieur.webp
+    Foto_interieur.webp             ← hero achtergrond
+    Eddy en Sabrina.webp            ← about sectie foto
   components/
-    Hero.jsx / Hero.css             ✅ gebouwd
-    Navbar.jsx / Navbar.css         ✅ gebouwd
-    TrainStrip.jsx / TrainStrip.css ✅ gebouwd — herbruikbare treinscheidingslijn
-    About.jsx / About.css           ✅ gebouwd
-    MenuBook.jsx / MenuBook.css     ⏳ te bouwen
-    Locatie.jsx / Locatie.css       ⏳ te bouwen
-    Contact.jsx / Contact.css       ⏳ te bouwen
-  App.jsx
+    Navbar.jsx / Navbar.css         ✅ gebouwd — scrolled-state, actieve sectie, mobiel menu + focus trap
+    Hero.jsx / Hero.css             ✅ gebouwd — fullscreen foto, overlay, CTA
+    About.jsx / About.css           ✅ gebouwd — 2-koloms grid, foto, Google Reviews link
+    TrainStrip.jsx / TrainStrip.css ✅ gebouwd — herbruikbare scheidingslijn, noTrack prop
+    Menu.jsx / Menu.css             ✅ gebouwd — 4 categorieën, springnavigatie, populair-badges
+    Locatie.jsx / Locatie.css       ✅ gebouwd — adres, kaart (consent-aware), openingsuren,
+                                               vandaag-badge, nu open/gesloten pill
+    Contact.jsx / Contact.css       ✅ gebouwd — 5 kanalen, klembord-kopieer, toast feedback
+    Footer.jsx / Footer.css         ✅ gebouwd — adres, navigatie, privacybeleid knop, credit
+    CookieBanner.jsx / CookieBanner.css  ✅ gebouwd — slide-up, Escape dismiss, gold/dark thema
+    PrivacyModal.jsx / PrivacyModal.css  ✅ gebouwd — focus trap, Escape, GDPR inhoud, animatie
+  App.jsx                           ← cookie consent state (localStorage), mapsConsent prop → Locatie
   App.css                           ← skip-link stijlen
   index.css                         ← design tokens (ENIGE bron voor kleuren/fonts/spacing)
+  data/
+    menu.json                       ← menudata (Decap CMS beheert dit)
 ```
+
+### Cookie consent patroon
+
+`localStorage` sleutel: `maps-consent` — waarden `'1'` (akkoord) of `'0'` (geweigerd), of afwezig (nog niet gevraagd).
+
+- Nog niet gevraagd: `<CookieBanner />` wordt getoond bij paginaopening
+- `mapsConsent` staat in `App.jsx`, wordt als prop doorgegeven aan `<Locatie />`
+- Bij `mapsConsent=false` toont Locatie een placeholder met link naar Google Maps
+- Bij `mapsConsent=true` laadt de Google Maps iframe
 
 ---
 
@@ -226,6 +256,8 @@ src/
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Reservatiesysteem | ⏳ Nog niet beslist — voorlopig placeholder knop |
-| 2 | Openingsuren | ⏳ Nog niet bekend — placeholder in Locatie sectie |
-| 3 | Extra foto's | ⏳ Nog niet beschikbaar — werkt met interieurafbeelding |
+| 1 | Reservatiesysteem | ⏳ Enkel telefonisch voor nu — toekomstige reservatiepagina gepland |
+| 2 | Openingsuren | ✅ Bevestigd — Ma–Wo gesloten, Do–Za 09:00–20:00, Zo 09:00–18:00 |
+| 3 | Extra foto's | ⏳ Enkel interieur + Eddy &amp; Sabrina beschikbaar |
+| 4 | Drankenkaart | ⏳ Nog niet aangeleverd door klant |
+| 5 | Cookie consent scope | ✅ Enkel Google Maps — Google Fonts en geen analytische cookies |

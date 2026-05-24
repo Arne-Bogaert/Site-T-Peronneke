@@ -1,0 +1,397 @@
+/* ── Locatie & Openingsuren ─────────────────────────────────── */
+.locatie {
+  background: var(--color-cream-warm);
+  padding: var(--space-section-v) var(--space-section-h);
+  scroll-margin-top: 100px;
+}
+
+.locatie-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 52fr 48fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: start;
+}
+
+/* ── Info kolom ───────────────────────────────────────────── */
+.locatie-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.locatie-accent {
+  width: 56px;
+  height: 4px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.locatie-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-blue-cobalt);
+  margin-bottom: 20px;
+}
+
+.locatie-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-blue-cobalt);
+  line-height: 1.25;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+/* ── Adres ────────────────────────────────────────────────── */
+.locatie-adres {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-dark);
+  margin-bottom: 0;
+}
+
+/* ── Routebeschrijving link ───────────────────────────────── */
+.locatie-directions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-blue-cobalt);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.locatie-directions svg {
+  transition: transform 0.15s ease;
+}
+
+.locatie-directions:hover {
+  color: var(--color-blue-navy);
+}
+
+.locatie-directions:hover svg {
+  transform: translateX(4px);
+}
+
+/* ── Gedeeld icon-stijl ───────────────────────────────────── */
+.locatie-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-blue-cobalt);
+  margin-top: 2px;
+}
+
+/* ── Scheidingslijn ───────────────────────────────────────── */
+.locatie-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(var(--color-dark-rgb), 0.12);
+  margin: clamp(20px, 2.5vw, 28px) 0;
+}
+
+/* ── Openingsuren ─────────────────────────────────────────── */
+.locatie-uren {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.locatie-uren-hd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-blue-cobalt);
+  margin: 0;
+}
+
+.locatie-uren-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.locatie-uren-rij {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+.locatie-uren-rij dt {
+  color: var(--color-dark);
+  font-weight: 500;
+}
+
+.locatie-uren-rij dd {
+  color: var(--color-dark);
+}
+
+/* Open rijen: subtiele gouden achtergrond */
+.locatie-uren-rij.is-open {
+  background: rgba(var(--color-gold-rgb), 0.07);
+}
+
+.locatie-uren-rij.is-open dt {
+  font-weight: 600;
+}
+
+/* Gesloten rijen: gedempt */
+.locatie-uren-rij.is-gesloten dt,
+.locatie-uren-rij.is-gesloten dd {
+  color: var(--color-muted);
+}
+
+/* ── Vandaag badge ────────────────────────────────────────── */
+.locatie-vandaag-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: var(--color-blue-cobalt);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 7px;
+  vertical-align: middle;
+  line-height: 1.6;
+}
+
+.locatie-uren-rij.is-vandaag.is-open .locatie-vandaag-badge {
+  background: var(--color-open);
+}
+
+/* ── Nu open / gesloten pill ──────────────────────────────── */
+.locatie-nu {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.locatie-nu--open {
+  color: var(--color-open);
+  background: var(--color-open-bg);
+}
+
+.locatie-nu--gesloten {
+  color: var(--color-muted);
+  background: rgba(var(--color-muted-rgb), 0.14);
+}
+
+/* ── Maps cookie consent placeholder ─────────────────────── */
+.locatie-kaart-consent {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(var(--color-dark-rgb), 0.04);
+  border-radius: 8px;
+  text-align: center;
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.locatie-consent-icon {
+  color: var(--color-muted);
+  opacity: 0.5;
+  margin-bottom: 4px;
+}
+
+.locatie-consent-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.locatie-consent-text {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+  max-width: 28ch;
+}
+
+.locatie-consent-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 24px;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-white);
+  background: var(--color-blue-cobalt);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.locatie-consent-btn:hover {
+  background: var(--color-blue-navy);
+}
+
+.locatie-consent-btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.locatie-consent-link {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.locatie-consent-link:hover {
+  color: var(--color-blue-cobalt);
+}
+
+/* ── Kaart kolom ──────────────────────────────────────────── */
+.locatie-kaart {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(var(--color-dark-rgb), 0.12);
+  aspect-ratio: 4 / 3;
+  min-height: 300px;
+  position: sticky;
+  top: 120px;
+}
+
+.locatie-kaart-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.locatie-kaart iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Fallback link: zichtbaar wanneer iframe faalt; subtiele badge op kaart */
+.locatie-kaart-fallback {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  background: rgba(var(--color-cream-rgb), 0.94);
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.locatie-kaart-fallback:hover {
+  background: rgba(var(--color-cream-rgb), 1);
+}
+
+/* ── Scroll reveal ────────────────────────────────────────── */
+.locatie-accent,
+.locatie-label,
+.locatie-title,
+.locatie-adres,
+.locatie-directions,
+.locatie-divider,
+.locatie-uren,
+.locatie-kaart {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity  0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.locatie--visible .locatie-accent,
+.locatie--visible .locatie-label,
+.locatie--visible .locatie-title,
+.locatie--visible .locatie-adres,
+.locatie--visible .locatie-directions,
+.locatie--visible .locatie-divider,
+.locatie--visible .locatie-uren,
+.locatie--visible .locatie-kaart {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .locatie-accent,
+  .locatie-label,
+  .locatie-title,
+  .locatie-adres,
+  .locatie-directions,
+  .locatie-divider,
+  .locatie-uren,
+  .locatie-kaart {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Mobiel ───────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .locatie {
+    scroll-margin-top: 84px;
+  }
+
+  .locatie-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .locatie-kaart {
+    aspect-ratio: 3 / 2;
+    min-height: 240px;
+    position: relative;
+  }
+
+  /* Touch target: 44px minimumhoogte voor taptoegang */
+  .locatie-directions {
+    min-height: 44px;
+    padding: 10px 0;
+  }
+}
