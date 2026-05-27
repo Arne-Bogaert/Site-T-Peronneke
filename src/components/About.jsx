@@ -53,12 +53,12 @@ export default function About() {
             bij te kletsen, hier voel je je meteen thuis.
           </p>
           <a
-            href="https://maps.google.com/?q=Moenebroeckstraat+12,+9506+Schendelbeke"
+            href="https://www.google.com/maps/place/''t+Perron+%7C+Koffiebar+en+eethuis+%7C+Schendelbeke+%7C+Geraardsbergen'/@51.0277382,3.3642508,10z/data=!4m12!1m2!2m1!1stperonneke!3m8!1s0x47c3a7894304f0cf:0xa6c31da125b98004!8m2!3d50.7978884!4d3.8985832!9m1!1b1!15sCgp0cGVyb25uZWtlWgwiCnRwZXJvbm5la2WSAQVkaW5lcpoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VNM2VXTllWalZSUlJBQuABAPoBBAgwEEY!16s%2Fg%2F11vsvsly9z?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             className="about-reviews"
             style={{ '--i': 5 }}
-            aria-label="Bekijk onze reviews op Google Maps (opent in nieuw venster)"
+            aria-label="Bekijk onze reviews op Google (opent in nieuw venster)"
           >
             <span className="about-reviews-stars" aria-hidden="true">★★★★★</span>
             Bekijk reviews op Google
