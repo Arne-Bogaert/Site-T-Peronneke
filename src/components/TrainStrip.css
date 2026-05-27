@@ -54,6 +54,11 @@
   bottom: 0;
 }
 
+/* Dark variant: trein rijdt op de footer (donkere achtergrond) */
+.train-strip--dark {
+  background: var(--color-dark);
+}
+
 /* Bij reduced motion: trein verdwijnt, railtrack blijft */
 @media (prefers-reduced-motion: reduce) {
   .train-group {

@@ -37,11 +37,11 @@ export default function App() {
       <main>
         <Hero />
         <About />
-        <TrainStrip noTrack />
         <Menu />
         <Locatie mapsConsent={mapsConsent} />
         <Contact />
         <Reservatie />
+        <TrainStrip noTrack />
       </main>
       <Footer />
       {bannerVisible && (

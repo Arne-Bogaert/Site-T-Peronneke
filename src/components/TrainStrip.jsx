@@ -6,10 +6,14 @@ import car9Gif       from '../assets/train/carriage_v18_car9.gif'
 import railtrackImg  from '../assets/train/railtrack_v1.png'
 import './TrainStrip.css'
 
-export default function TrainStrip({ noTrack = false }) {
+export default function TrainStrip({ noTrack = false, dark = false }) {
   return (
     <div
-      className={`train-strip${noTrack ? ' train-strip--no-track' : ''}`}
+      className={[
+        'train-strip',
+        noTrack ? 'train-strip--no-track' : '',
+        dark   ? 'train-strip--dark'     : '',
+      ].filter(Boolean).join(' ')}
       aria-hidden="true"
     >
       <div className="train-group">
