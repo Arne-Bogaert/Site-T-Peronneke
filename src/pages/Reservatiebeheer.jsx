@@ -181,45 +181,56 @@ function ReservatieKaart({ reservatie, onStatusChange }) {
         {fout && <p className="rb-kaart-fout" role="alert">{fout}</p>}
       </div>
 
-      {reservatie.status !== 'geannuleerd' && (
-        <div className="rb-kaart-acties">
-          {reservatie.status === 'nieuw' && (
-            <button
-              className="rb-btn-bevestig"
-              onClick={() => updateStatus('bevestigd')}
-              disabled={updating}
-            >
-              Bevestigen
-            </button>
-          )}
-          {annuleerConfirm ? (
-            <div className="rb-annuleer-confirm">
-              <span>Zeker annuleren?</span>
+      <div className="rb-kaart-acties">
+        {reservatie.status === 'geannuleerd' ? (
+          <button
+            className="rb-btn-reactiveer"
+            onClick={() => updateStatus('bevestigd')}
+            disabled={updating}
+          >
+            Reactiveren
+          </button>
+        ) : (
+          <>
+            {reservatie.status === 'nieuw' && (
               <button
-                className="rb-btn-annuleer-ja"
-                onClick={() => updateStatus('geannuleerd')}
+                className="rb-btn-bevestig"
+                onClick={() => updateStatus('bevestigd')}
                 disabled={updating}
               >
-                Ja
+                Bevestigen
               </button>
+            )}
+            {annuleerConfirm ? (
+              <div className="rb-annuleer-confirm" role="alert">
+                <span>Zeker annuleren?</span>
+                <button
+                  className="rb-btn-annuleer-ja"
+                  onClick={() => updateStatus('geannuleerd')}
+                  disabled={updating}
+                  aria-label="Ja, annuleren"
+                >
+                  Ja
+                </button>
+                <button
+                  className="rb-btn-annuleer-nee"
+                  onClick={() => setAnnuleerConfirm(false)}
+                >
+                  Nee
+                </button>
+              </div>
+            ) : (
               <button
-                className="rb-btn-annuleer-nee"
-                onClick={() => setAnnuleerConfirm(false)}
+                className="rb-btn-annuleer"
+                onClick={() => setAnnuleerConfirm(true)}
+                disabled={updating}
               >
-                Nee
+                Annuleren
               </button>
-            </div>
-          ) : (
-            <button
-              className="rb-btn-annuleer"
-              onClick={() => setAnnuleerConfirm(true)}
-              disabled={updating}
-            >
-              Annuleren
-            </button>
-          )}
-        </div>
-      )}
+            )}
+          </>
+        )}
+      </div>
     </article>
   )
 }
@@ -394,6 +405,7 @@ export default function Reservatiebeheer() {
   const [ladenData, setLadenData] = useState(false)
   const [datum, setDatum] = useState(todayStr())
   const [modalOpen, setModalOpen] = useState(false)
+  const datumInputRef = useRef(null)
 
   // Sessie ophalen bij laden
   useEffect(() => {
@@ -421,6 +433,31 @@ export default function Reservatiebeheer() {
         setLadenData(false)
       })
   }, [datum, sessie])
+
+  // Pijltoetsen links/rechts navigeren door dagen (niet wanneer een input gefocust is)
+  useEffect(() => {
+    const onKey = (e) => {
+      const tag = document.activeElement?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+      const richting = e.key === 'ArrowLeft' ? -1 : 1
+      setDatum(prev => {
+        const d = new Date(prev + 'T00:00:00')
+        d.setDate(d.getDate() + richting)
+        return [
+          d.getFullYear(),
+          String(d.getMonth() + 1).padStart(2, '0'),
+          String(d.getDate()).padStart(2, '0'),
+        ].join('-')
+      })
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
+
+  const openDatumPicker = () => {
+    try { datumInputRef.current?.showPicker() } catch (_) {}
+  }
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -490,7 +527,12 @@ export default function Reservatiebeheer() {
           </button>
 
           <div className="rb-datum-midden">
-            <p className="rb-datum-label">
+            <button
+              type="button"
+              className="rb-datum-label"
+              onClick={openDatumPicker}
+              aria-label={`Kies datum, geselecteerd: ${formatDateNL(datum)}`}
+            >
               {formatDateNL(datum)}
               <svg className="rb-datum-kalender-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -498,13 +540,15 @@ export default function Reservatiebeheer() {
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
-            </p>
+            </button>
             <input
+              ref={datumInputRef}
               type="date"
               className="rb-datum-input"
               value={datum}
               onChange={e => setDatum(e.target.value)}
-              aria-label="Kies datum"
+              aria-hidden="true"
+              tabIndex={-1}
             />
           </div>
 

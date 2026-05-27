@@ -1,3 +1,0 @@
-impeccable audit
-impeccable critique
-impeccable polish

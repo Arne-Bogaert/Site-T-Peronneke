@@ -37,6 +37,17 @@ function generateTimeSlots(dateStr) {
     m += 30
     if (m >= 60) { m -= 60; h++ }
   }
+
+  // Filter verleden slots wanneer datum vandaag is
+  if (dateStr === todayStr()) {
+    const now = new Date()
+    const currentMinutes = now.getHours() * 60 + now.getMinutes()
+    return slots.filter(slot => {
+      const [sh, sm] = slot.split(':').map(Number)
+      return sh * 60 + sm > currentMinutes
+    })
+  }
+
   return slots
 }
 
@@ -48,6 +59,7 @@ const INIT = {
 export default function Reservatie() {
   const sectionRef = useRef(null)
   const successRef = useRef(null)
+  const formRef = useRef(null)
   const [form, setForm] = useState(INIT)
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
@@ -88,6 +100,13 @@ export default function Reservatie() {
       e.datum = 'We zijn gesloten op maandag, dinsdag en woensdag.'
     if (!form.tijdstip)
       e.tijdstip = 'Kies een tijdstip.'
+    else if (form.datum === todayStr()) {
+      const now = new Date()
+      const currentMinutes = now.getHours() * 60 + now.getMinutes()
+      const [sh, sm] = form.tijdstip.split(':').map(Number)
+      if (sh * 60 + sm <= currentMinutes)
+        e.tijdstip = 'Dit tijdstip is al voorbij. Kies een later tijdstip.'
+    }
     const num = Number(form.aantal_personen)
     if (!form.aantal_personen || isNaN(num) || num < 1 || num > 20)
       e.aantal_personen = 'Vul een aantal in tussen 1 en 20.'
@@ -175,7 +194,7 @@ export default function Reservatie() {
           <p className="reservatie-intro" style={{ '--i': 3 }}>
             Reserveer uw tafel online of bel ons op{' '}
             <a href="tel:+32471745668" className="reservatie-phone-link">0471 74 56 68</a>.
-            Wij bevestigen zo snel mogelijk.
+            We bevestigen binnen 24 uur.
           </p>
         </div>
 
@@ -198,13 +217,13 @@ export default function Reservatie() {
               </p>
               <button
                 className="reservatie-btn-secondary"
-                onClick={() => setSuccess(false)}
+                onClick={() => { setSuccess(false); setTimeout(() => formRef.current?.focus(), 50) }}
               >
                 Nog een reservatie maken
               </button>
             </div>
           ) : (
-            <form className="reservatie-form" onSubmit={handleSubmit} noValidate>
+            <form className="reservatie-form" onSubmit={handleSubmit} noValidate aria-busy={loading} ref={formRef} tabIndex={-1}>
 
               {/* Naam + Telefoon */}
               <div className="reservatie-row">
@@ -239,7 +258,7 @@ export default function Reservatie() {
                     className="reservatie-input"
                     value={form.telefoon}
                     onChange={handleChange}
-                    placeholder="0472 12 34 56"
+                    placeholder="bv. 0471 74 56 68"
                     autoComplete="tel"
                   />
                 </div>
@@ -273,7 +292,7 @@ export default function Reservatie() {
               </div>
 
               {/* Datum + Tijdstip */}
-              <div className="reservatie-row">
+              <div className="reservatie-row reservatie-row--break">
                 <div className={`reservatie-field${errors.datum ? ' reservatie-field--error' : ''}`}>
                   <label className="reservatie-field-label" htmlFor="r-datum">
                     Datum <span className="reservatie-required" aria-hidden="true">*</span>
@@ -344,7 +363,7 @@ export default function Reservatie() {
 
               {/* Aantal personen */}
               <div className="reservatie-row">
-                <div className={`reservatie-field${errors.aantal_personen ? ' reservatie-field--error' : ''}`}>
+                <div className={`reservatie-field reservatie-field--full${errors.aantal_personen ? ' reservatie-field--error' : ''}`}>
                   <label className="reservatie-field-label" htmlFor="r-personen">
                     Aantal personen <span className="reservatie-required" aria-hidden="true">*</span>
                   </label>
@@ -381,7 +400,7 @@ export default function Reservatie() {
                     rows={3}
                     maxLength={500}
                     placeholder="Allergieën, speciale gelegenheid, …"
-                    aria-describedby={errors.opmerking ? 'err-opmerking' : 'hint-opmerking'}
+                    aria-describedby={errors.opmerking ? 'err-opmerking' : form.opmerking.length > 0 ? 'hint-opmerking' : undefined}
                   />
                   {form.opmerking.length > 0 && (
                     <span id="hint-opmerking" className="reservatie-field-hint reservatie-field-hint--right">

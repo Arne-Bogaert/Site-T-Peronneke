@@ -121,23 +121,33 @@
   background: var(--color-gold);
   color: var(--color-dark);
   padding: 9px 20px;
-  border-radius: 7px;
+  border-radius: 8px;
   font-weight: 600;
   margin-left: 8px;
   transition:
-    background  0.2s ease,
-    color       0.2s ease,
-    transform   0.15s ease;
+    background  0.2s var(--ease-smooth),
+    color       0.2s var(--ease-smooth),
+    transform   0.15s var(--ease-smooth);
 }
 
 .navbar-link.navbar-link--cta::after {
   display: none;
 }
 
+/* Expliciete override — volgorde-onafhankelijk van is-active cascade */
+.navbar-link.navbar-link--cta.is-active {
+  color: var(--color-dark);
+}
+
+/* Focus: donkere outline zichtbaar op gouden achtergrond en hero-foto */
+.navbar-link.navbar-link--cta:focus-visible {
+  outline-color: var(--color-dark);
+}
+
 .navbar-link.navbar-link--cta:hover,
 .navbar.is-scrolled .navbar-link.navbar-link--cta:hover {
   background: var(--color-amber);
-  color: var(--color-white);
+  color: var(--color-dark);
   transform: translateY(-1px);
 }
 
@@ -287,13 +297,21 @@
 }
 
 .mobile-menu-link--cta {
-  color: var(--color-gold);
+  background: var(--color-gold);
+  color: var(--color-dark);
   font-weight: 600;
-  margin-top: 8px;
+  border-radius: 8px;
+  padding: 12px 40px;
+  margin-top: 16px;
 }
 
 .mobile-menu-link--cta:hover {
-  color: var(--color-amber);
+  background: var(--color-amber);
+  color: var(--color-dark);
+}
+
+.mobile-menu-link--cta:focus-visible {
+  outline-color: var(--color-dark);
 }
 
 /* ── Logo overflow-fix: intermediaire breedte ───────────────── */

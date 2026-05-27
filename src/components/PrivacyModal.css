@@ -54,8 +54,8 @@
 }
 
 .privacy-modal-close {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +65,7 @@
   color: var(--color-muted);
   font-size: 1rem;
   border-radius: 6px;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition: color 0.15s var(--ease-smooth), background 0.15s var(--ease-smooth);
 }
 
 .privacy-modal-close:hover {
@@ -100,14 +100,14 @@
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-blue-cobalt);
-  margin-top: 8px;
+  margin-top: 20px;
   margin-bottom: 0;
 }
 
 .privacy-modal-body p,
 .privacy-modal-body ul {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.65;
   color: var(--color-dark);
   margin: 0;

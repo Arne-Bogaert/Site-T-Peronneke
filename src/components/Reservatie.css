@@ -107,6 +107,15 @@
   grid-column: 1 / -1;
 }
 
+.reservatie-row--break {
+  margin-top: 8px;
+}
+
+/* Form zelf focusbaar voor schermlezers bij terugkeer vanuit succes-state */
+.reservatie-form:focus {
+  outline: none;
+}
+
 /* ── Labels ──────────────────────────────────────────────────── */
 .reservatie-field-label {
   font-family: var(--font-body);
@@ -155,11 +164,11 @@
 }
 
 .reservatie-field--error .reservatie-input {
-  border-color: #c0392b;
+  border-color: var(--color-error);
 }
 
 .reservatie-field--error .reservatie-input:focus {
-  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+  box-shadow: 0 0 0 3px rgba(var(--color-error-rgb), 0.12);
 }
 
 /* ── Select ──────────────────────────────────────────────────── */
@@ -209,7 +218,7 @@
 .reservatie-field-error {
   font-family: var(--font-body);
   font-size: 0.82rem;
-  color: #c0392b;
+  color: var(--color-error);
   line-height: 1.4;
 }
 
@@ -232,9 +241,9 @@
 .reservatie-submit-error {
   font-family: var(--font-body);
   font-size: 0.88rem;
-  color: #c0392b;
-  background: rgba(192, 57, 43, 0.05);
-  border: 1px solid rgba(192, 57, 43, 0.18);
+  color: var(--color-error);
+  background: rgba(var(--color-error-rgb), 0.05);
+  border: 1px solid rgba(var(--color-error-rgb), 0.18);
   border-radius: 8px;
   padding: 12px 16px;
   line-height: 1.5;
@@ -304,7 +313,7 @@
   width: 16px;
   height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.35);
-  border-top-color: #ffffff;
+  border-top-color: var(--color-white);
   border-radius: 50%;
   animation: r-spin 0.65s linear infinite;
   flex-shrink: 0;
@@ -419,5 +428,17 @@
   .reservatie-btn {
     justify-content: center;
     padding: 14px 28px;
+  }
+
+  .reservatie-btn-secondary {
+    padding: 14px 22px;
+  }
+
+  .reservatie-input[type="number"] {
+    max-width: 100%;
+  }
+
+  .reservatie-textarea {
+    resize: none;
   }
 }

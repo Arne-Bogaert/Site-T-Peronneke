@@ -69,8 +69,13 @@ public/
 
 ## Documentatie
 
+De onderstaande bestanden staan in de lokale map `Documentatie/` en zijn niet opgenomen in git (zie `.gitignore`).
+
 | Bestand | Inhoud |
 | --- | --- |
-| `DESIGN.md` | Designsysteem: kleuren, typografie, animaties, componentstructuur |
-| `PRODUCT.md` | Merkidentiteit, doelpubliek, designprincipes |
-| `ReservatieTechstack.md` | Architectuur reservatiesysteem, techstack, handmatige setup, toekomstige plannen |
+| `Documentatie/DESIGN.md` | Designsysteem: kleuren, typografie, animaties, componentstructuur |
+| `Documentatie/PRODUCT.md` | Merkidentiteit, doelpubliek, designprincipes |
+| `Documentatie/ReservatieTechstack.md` | Architectuur reservatiesysteem, techstack, handmatige setup, toekomstige plannen |
+| `Documentatie/BEWAARD_TEKST.md` | Bewaarde kopyteksten en contentnotities |
+| `Documentatie/Skillorder.md` | Volgorde en aanpak van de UI-polish sessies |
+| `Documentatie/adminPaneel.md` | Notities en beslissingen rond het adminpaneel |

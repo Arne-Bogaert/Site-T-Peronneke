@@ -97,10 +97,6 @@ export default function PrivacyModal({ onClose }) {
           </p>
 
           <h3>Externe diensten</h3>
-          <p>
-            Deze website maakt gebruik van twee externe diensten die mogelijk
-            gegevens verwerken:
-          </p>
           <ul>
             <li>
               <strong>Google Maps</strong> — De interactieve kaart wordt
@@ -112,7 +108,7 @@ export default function PrivacyModal({ onClose }) {
                 href="https://policies.google.com/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Google Privacybeleid (opent in nieuw venster)"
+                aria-label="Google Privacybeleid voor Google Maps (opent in nieuw venster)"
               >
                 Google Privacybeleid
               </a>
@@ -125,7 +121,7 @@ export default function PrivacyModal({ onClose }) {
                 href="https://policies.google.com/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Google Privacybeleid (opent in nieuw venster)"
+                aria-label="Google Privacybeleid voor Google Fonts (opent in nieuw venster)"
               >
                 Google Privacybeleid
               </a>
