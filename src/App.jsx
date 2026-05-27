@@ -6,6 +6,7 @@ import TrainStrip from './components/TrainStrip'
 import Menu from './components/Menu'
 import Locatie from './components/Locatie'
 import Contact from './components/Contact'
+import Reservatie from './components/Reservatie'
 import Footer from './components/Footer'
 import CookieBanner from './components/CookieBanner'
 import './App.css'
@@ -40,6 +41,7 @@ export default function App() {
         <Menu />
         <Locatie mapsConsent={mapsConsent} />
         <Contact />
+        <Reservatie />
       </main>
       <Footer />
       {bannerVisible && (

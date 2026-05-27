@@ -1,16 +1,76 @@
-# React + Vite
+# 't Perroneke — Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketingwebsite voor 't Perroneke, koffiebar & eethuis naast het treinstation in Schendelbeke.
+Uitgebaat door Eddy en Sabrina. Gebouwd door Arne Bogaert.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
 
-## React Compiler
+- **React + Vite** — SPA, plain CSS, geen TypeScript
+- **React Router DOM** — clientside routing (`/` en `/reservatiebeheer`)
+- **Supabase** — PostgreSQL database + authenticatie (EU-Frankfurt)
+- **Netlify** — hosting, Netlify Functions (serverless), scheduled functions
+- **Resend** — transactionele e-mails
+- **Decap CMS** — contentbeheer voor menu (`/admin`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Lokaal starten
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npx netlify dev
+```
+
+Gebruik `npx netlify dev` (niet `npm run dev`) zodat Netlify Functions meedraaien voor e-mailnotificaties.
+
+### Vereiste omgevingsvariabelen (.env in projectroot)
+
+```env
+VITE_SUPABASE_URL=https://[project-ref].supabase.co
+VITE_SUPABASE_ANON_KEY=[anon key]
+RESEND_API_KEY=re_[key]
+```
+
+---
+
+## Structuur
+
+```text
+src/
+  components/      ← publieke paginasecties (Navbar, Hero, About, Menu, Locatie, Contact, Reservatie, Footer, …)
+  pages/           ← volledige pagina's buiten de hoofdsite (Reservatiebeheer)
+  lib/             ← Supabase client singleton
+  assets/          ← logo, foto's, pixel trein GIFs
+  data/
+    menu.json      ← menudata, beheerd via Decap CMS
+
+netlify/
+  functions/
+    stuur-bevestiging.js   ← e-mailnotificaties bij nieuwe reservatie (Resend)
+    keepalive.js           ← Supabase anti-pauze ping (elke 5 dagen)
+
+public/
+  admin/           ← Decap CMS (niet aanraken)
+```
+
+---
+
+## Routes
+
+| Route | Inhoud |
+| --- | --- |
+| `/` | Publieke éénpagina site |
+| `/reservatiebeheer` | Admin panel voor Eddy & Sabrina (login vereist) |
+| `/admin` | Decap CMS — contentbeheer menu |
+
+---
+
+## Documentatie
+
+| Bestand | Inhoud |
+| --- | --- |
+| `DESIGN.md` | Designsysteem: kleuren, typografie, animaties, componentstructuur |
+| `PRODUCT.md` | Merkidentiteit, doelpubliek, designprincipes |
+| `ReservatieTechstack.md` | Architectuur reservatiesysteem, techstack, handmatige setup, toekomstige plannen |

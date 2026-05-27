@@ -1,4 +1,3 @@
-high-end-visual-design
-frontend-design
-emil design eng
-impeccable
+impeccable audit
+impeccable critique
+impeccable polish

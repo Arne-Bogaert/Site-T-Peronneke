@@ -115,10 +115,13 @@ About (cream-warm)       ← gradient-overgang van donker boven; geen losse Trai
 Menu (cream)
 Locatie (cream-warm)
 Contact (cream)
+Reservatie (cream-warm)  ← geen extra TrainStrip; kleurwisseling volstaat als scheiding
 Footer (dark)            ← donkere afsluitende balk, spiegelt hero-donker
 ```
 
-**Sectie-achtergrond patroon:** cream-warm → cream → cream-warm → cream (afwisselend). Footer doorbreekt het patroon bewust met dark.
+**Admin panel (aparte route):** `/reservatiebeheer` — eigen pagina zonder Navbar/Footer, eigen CSS op basis van dezelfde design tokens.
+
+**Sectie-achtergrond patroon:** cream-warm → cream → cream-warm → cream → cream-warm (afwisselend). Footer doorbreekt het patroon bewust met dark.
 
 **Nota TrainStrip:** De `noTrack` variant zit enkel als scheidingslijn tussen About en Menu. De standaard `<TrainStrip />` (met railtrack) zit enkel intern in Hero.
 
@@ -222,8 +225,10 @@ src/
     'T Perron Korte Papegaai.webp   ← beschikbaar als alternatief
     Foto_interieur.webp             ← hero achtergrond
     Eddy en Sabrina.webp            ← about sectie foto
+  lib/
+    supabase.js                     ← Supabase client singleton
   components/
-    Navbar.jsx / Navbar.css         ✅ gebouwd — scrolled-state, actieve sectie, mobiel menu + focus trap
+    Navbar.jsx / Navbar.css         ✅ gebouwd — scrolled-state, actieve sectie, mobiel menu + focus trap, Reserveren CTA
     Hero.jsx / Hero.css             ✅ gebouwd — fullscreen foto, overlay, CTA
     About.jsx / About.css           ✅ gebouwd — 2-koloms grid, foto, Google Reviews link
     TrainStrip.jsx / TrainStrip.css ✅ gebouwd — herbruikbare scheidingslijn, noTrack prop
@@ -231,14 +236,24 @@ src/
     Locatie.jsx / Locatie.css       ✅ gebouwd — adres, kaart (consent-aware), openingsuren,
                                                vandaag-badge, nu open/gesloten pill
     Contact.jsx / Contact.css       ✅ gebouwd — 5 kanalen, klembord-kopieer, toast feedback
+    Reservatie.jsx / Reservatie.css ✅ gebouwd — reservatieformulier, validatie, Supabase insert,
+                                               gesloten-dag detectie, tijdslots per dag, scroll reveal
     Footer.jsx / Footer.css         ✅ gebouwd — adres, navigatie, privacybeleid knop, credit
     CookieBanner.jsx / CookieBanner.css  ✅ gebouwd — slide-up, Escape dismiss, gold/dark thema
-    PrivacyModal.jsx / PrivacyModal.css  ✅ gebouwd — focus trap, Escape, GDPR inhoud, animatie
+    PrivacyModal.jsx / PrivacyModal.css  ✅ gebouwd — focus trap, Escape, GDPR inhoud (incl. reservaties), animatie
+  pages/
+    Reservatiebeheer.jsx            ✅ gebouwd — admin panel: login, dagoverzicht, statusbeheer, telefonisch modal
+    Reservatiebeheer.css            ✅ gebouwd — eigen stijlen op basis van design tokens
   App.jsx                           ← cookie consent state (localStorage), mapsConsent prop → Locatie
   App.css                           ← skip-link stijlen
   index.css                         ← design tokens (ENIGE bron voor kleuren/fonts/spacing)
+  main.jsx                          ← BrowserRouter + routes (/ en /reservatiebeheer)
   data/
     menu.json                       ← menudata (Decap CMS beheert dit)
+netlify/
+  functions/
+    stuur-bevestiging.js            ✅ gebouwd — e-mailnotificaties via Resend
+    keepalive.js                    ✅ gebouwd — Supabase anti-pauze ping (elke 5 dagen)
 ```
 
 ### Cookie consent patroon
@@ -256,8 +271,9 @@ src/
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Reservatiesysteem | ⏳ Enkel telefonisch voor nu — toekomstige reservatiepagina gepland |
+| 1 | Reservatiesysteem | ✅ Gebouwd — online formulier + admin panel `/reservatiebeheer`. Zie `ReservatieTechstack.md`. |
 | 2 | Openingsuren | ✅ Bevestigd — Ma–Wo gesloten, Do–Za 09:00–20:00, Zo 09:00–18:00 |
-| 3 | Extra foto's | ⏳ Enkel interieur + Eddy &amp; Sabrina beschikbaar |
+| 3 | Extra foto's | ⏳ Enkel interieur + Eddy & Sabrina beschikbaar |
 | 4 | Drankenkaart | ⏳ Nog niet aangeleverd door klant |
 | 5 | Cookie consent scope | ✅ Enkel Google Maps — Google Fonts en geen analytische cookies |
+| 6 | Auto-bevestigingsmail bij statuswijziging | ⏳ Bespreken met Eddy & Sabrina — zie `ReservatieTechstack.md` §Toekomstige plannen |

@@ -3,10 +3,11 @@ import fullLogoImg from "../assets/'T Perron Logo.png"
 import './Navbar.css'
 
 const NAV_LINKS = [
-  { label: 'Over ons',  href: '#over-ons'  },
-  { label: 'Menu',      href: '#menu'      },
-  { label: 'Locatie',   href: '#locatie'   },
-  { label: 'Contact',   href: '#contact'   },
+  { label: 'Over ons',   href: '#over-ons'   },
+  { label: 'Menu',       href: '#menu'       },
+  { label: 'Locatie',    href: '#locatie'    },
+  { label: 'Contact',    href: '#contact'    },
+  { label: 'Reserveren', href: '#reserveren', cta: true },
 ]
 
 export default function Navbar() {
@@ -82,7 +83,11 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className={`navbar-link${link.href === '#' + activeSection ? ' is-active' : ''}`}
+              className={[
+                'navbar-link',
+                link.cta ? 'navbar-link--cta' : '',
+                link.href === '#' + activeSection ? 'is-active' : '',
+              ].filter(Boolean).join(' ')}
             >
               {link.label}
             </a>
@@ -120,7 +125,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="mobile-menu-link"
+                className={`mobile-menu-link${link.cta ? ' mobile-menu-link--cta' : ''}`}
                 style={{ animationDelay: `${i * 60 + 80}ms` }}
                 onClick={close}
               >

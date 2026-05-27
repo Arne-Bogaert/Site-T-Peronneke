@@ -65,11 +65,35 @@ export default function PrivacyModal({ onClose }) {
             <a href="mailto:tperron@outlook.be">tperron@outlook.be</a>
           </p>
 
-          <h3>Welke gegevens verwerken wij?</h3>
+          <h3>Reservaties</h3>
           <p>
-            Wij verzamelen via deze website zelf geen persoonsgegevens.
-            Er worden geen formulieren, login-systemen of analytische cookies
-            door ons geplaatst.
+            Wanneer u een tafel reserveert via onze website, verwerken wij de
+            volgende gegevens: naam, datum, tijdstip, aantal personen en
+            eventueel een telefoonnummer, e-mailadres en opmerking.
+            Deze gegevens worden uitsluitend gebruikt om uw reservatie te
+            bevestigen en te beheren.
+          </p>
+          <p>
+            Uw reservatiegegevens worden opgeslagen via{' '}
+            <strong>Supabase Inc.</strong> op servers in Frankfurt (EU).
+            Supabase is gecertificeerd onder de Standard Contractual Clauses
+            en heeft een verwerkersovereenkomst (DPA) beschikbaar via{' '}
+            <a
+              href="https://supabase.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Supabase privacybeleid (opent in nieuw venster)"
+            >
+              supabase.com/privacy
+            </a>
+            . Reservaties worden bewaard tot 30 dagen na de reservatiedatum
+            en daarna verwijderd.
+          </p>
+          <p>
+            E-mailbevestigingen worden verstuurd via{' '}
+            <strong>Resend Inc.</strong> Uw e-mailadres wordt enkel gebruikt
+            om u de bevestiging te bezorgen en wordt niet bewaard door Resend
+            na verzending.
           </p>
 
           <h3>Externe diensten</h3>

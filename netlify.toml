@@ -19,3 +19,12 @@
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     X-XSS-Protection = "1; mode=block"
+
+[functions."keepalive"]
+  schedule = "0 3 */5 * *"
+
+# SPA catch-all — staat bewust NA de /admin redirects
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

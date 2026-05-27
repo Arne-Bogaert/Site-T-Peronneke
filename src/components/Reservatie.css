@@ -1,0 +1,423 @@
+/* ── Reservatie ─────────────────────────────────────────────── */
+.reservatie {
+  background: var(--color-cream-warm);
+  padding: var(--space-section-v) var(--space-section-h);
+  scroll-margin-top: 100px;
+}
+
+.reservatie-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(40px, 6vw, 56px);
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.reservatie-header {
+  text-align: center;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reservatie-accent {
+  width: 56px;
+  height: 4px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.reservatie-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-blue-cobalt);
+  margin-bottom: 20px;
+}
+
+.reservatie-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-blue-cobalt);
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.reservatie-intro {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+.reservatie-phone-link {
+  color: var(--color-blue-cobalt);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--color-blue-cobalt-rgb), 0.3);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.reservatie-phone-link:hover {
+  text-decoration-color: var(--color-blue-cobalt);
+}
+
+/* ── Form card ───────────────────────────────────────────────── */
+.reservatie-form-wrapper {
+  width: 100%;
+  max-width: 760px;
+  background: var(--color-white);
+  border-radius: 16px;
+  border: 1px solid rgba(var(--color-dark-rgb), 0.06);
+  box-shadow:
+    0 2px 8px rgba(var(--color-dark-rgb), 0.04),
+    0 8px 32px rgba(var(--color-dark-rgb), 0.07);
+  padding: clamp(28px, 5vw, 48px);
+}
+
+/* ── Form layout ─────────────────────────────────────────────── */
+.reservatie-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reservatie-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.reservatie-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reservatie-field--full {
+  grid-column: 1 / -1;
+}
+
+/* ── Labels ──────────────────────────────────────────────────── */
+.reservatie-field-label {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.4;
+}
+
+.reservatie-required {
+  color: var(--color-blue-cobalt);
+  margin-left: 2px;
+}
+
+/* ── Inputs ──────────────────────────────────────────────────── */
+.reservatie-input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-dark);
+  background: var(--color-cream);
+  border: 1.5px solid rgba(var(--color-dark-rgb), 0.14);
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 100%;
+  transition:
+    border-color 0.2s ease,
+    box-shadow   0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.reservatie-input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.55;
+}
+
+.reservatie-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(var(--color-gold-rgb), 0.15);
+}
+
+.reservatie-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reservatie-field--error .reservatie-input {
+  border-color: #c0392b;
+}
+
+.reservatie-field--error .reservatie-input:focus {
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+}
+
+/* ── Select ──────────────────────────────────────────────────── */
+.reservatie-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2357647F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.reservatie-select:disabled {
+  cursor: not-allowed;
+}
+
+/* ── Number input — verberg browser spin-buttons ─────────────── */
+.reservatie-input[type="number"]::-webkit-inner-spin-button,
+.reservatie-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.reservatie-input[type="number"] {
+  -moz-appearance: textfield;
+  max-width: 180px;
+}
+
+/* ── Textarea ────────────────────────────────────────────────── */
+.reservatie-textarea {
+  resize: vertical;
+  min-height: 88px;
+  line-height: 1.6;
+}
+
+/* ── Hints & errors ──────────────────────────────────────────── */
+.reservatie-field-hint {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.reservatie-field-hint--right {
+  text-align: right;
+}
+
+.reservatie-field-error {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: #c0392b;
+  line-height: 1.4;
+}
+
+/* ── Submit row ──────────────────────────────────────────────── */
+.reservatie-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.reservatie-required-note {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+.reservatie-submit-error {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.05);
+  border: 1px solid rgba(192, 57, 43, 0.18);
+  border-radius: 8px;
+  padding: 12px 16px;
+  line-height: 1.5;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.reservatie-btn {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-white);
+  background: var(--color-blue-cobalt);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  transition:
+    background  0.2s ease,
+    transform   0.15s ease;
+}
+
+.reservatie-btn:hover:not(:disabled) {
+  background: var(--color-blue-navy);
+  transform: translateY(-1px);
+}
+
+.reservatie-btn:active:not(:disabled) {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+
+.reservatie-btn:disabled,
+.reservatie-btn--loading {
+  opacity: 0.72;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.reservatie-btn-secondary {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-blue-cobalt);
+  background: none;
+  border: 1.5px solid rgba(var(--color-blue-cobalt-rgb), 0.28);
+  border-radius: 8px;
+  padding: 10px 22px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition:
+    border-color 0.2s ease,
+    background   0.2s ease;
+}
+
+.reservatie-btn-secondary:hover {
+  border-color: var(--color-blue-cobalt);
+  background: rgba(var(--color-blue-cobalt-rgb), 0.05);
+}
+
+/* ── Spinner ─────────────────────────────────────────────────── */
+.reservatie-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: r-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes r-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Success state ───────────────────────────────────────────── */
+.reservatie-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 40px);
+  gap: 12px;
+}
+
+.reservatie-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(var(--color-open-rgb), 0.1);
+  color: var(--color-open);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.reservatie-success-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: var(--color-blue-cobalt);
+}
+
+.reservatie-success-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+  max-width: 480px;
+}
+
+.reservatie-success-text a {
+  color: var(--color-blue-cobalt);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Scroll reveal ───────────────────────────────────────────── */
+.reservatie-accent,
+.reservatie-label,
+.reservatie-title,
+.reservatie-intro,
+.reservatie-form-wrapper {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.reservatie--visible .reservatie-accent,
+.reservatie--visible .reservatie-label,
+.reservatie--visible .reservatie-title,
+.reservatie--visible .reservatie-intro,
+.reservatie--visible .reservatie-form-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reservatie-accent,
+  .reservatie-label,
+  .reservatie-title,
+  .reservatie-intro,
+  .reservatie-form-wrapper {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .reservatie-spinner {
+    animation: none;
+  }
+}
+
+/* ── Mobiel ──────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .reservatie {
+    scroll-margin-top: 84px;
+  }
+
+  .reservatie-row {
+    grid-template-columns: 1fr;
+  }
+
+  .reservatie-field--full {
+    grid-column: auto;
+  }
+
+  .reservatie-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .reservatie-btn {
+    justify-content: center;
+    padding: 14px 28px;
+  }
+}

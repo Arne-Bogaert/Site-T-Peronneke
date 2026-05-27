@@ -1,0 +1,787 @@
+/* ── Reservatiebeheer — admin paneel ─────────────────────────── */
+/* Geen Navbar/Footer. Eigen stijlen, zelfde design tokens.      */
+
+:root {
+  --rb-radius: 10px;
+  --rb-shadow: 0 2px 8px rgba(26, 28, 46, 0.07), 0 1px 2px rgba(26, 28, 46, 0.04);
+}
+
+.rb-wrap {
+  min-height: 100dvh;
+  background: var(--color-cream);
+  font-family: var(--font-body);
+  color: var(--color-dark);
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.rb-header {
+  background: var(--color-dark);
+  padding: 0 clamp(16px, 4vw, 40px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.rb-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 64px;
+}
+
+.rb-header-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+.rb-header-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rb-btn-logout {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  background: none;
+  border: 1px solid rgba(87, 100, 127, 0.3);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.rb-btn-logout:hover {
+  color: var(--color-cream);
+  border-color: rgba(250, 247, 242, 0.3);
+}
+
+/* ── Main ─────────────────────────────────────────────────────── */
+.rb-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px clamp(16px, 4vw, 40px) 120px;
+}
+
+/* ── Datumnavigatie ───────────────────────────────────────────── */
+.rb-datum-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: var(--color-white);
+  border: 1px solid rgba(26, 28, 46, 0.08);
+  border-radius: var(--rb-radius);
+  padding: 12px 16px;
+  box-shadow: var(--rb-shadow);
+}
+
+.rb-datum-midden {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+}
+
+.rb-datum-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.rb-datum-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.rb-datum-kalender-icon {
+  vertical-align: middle;
+  margin-left: 5px;
+  color: var(--color-muted);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.rb-datum-nav {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.rb-datum-nav:hover {
+  background: var(--color-cream-warm);
+  color: var(--color-blue-cobalt);
+}
+
+/* ── Samenvatting ─────────────────────────────────────────────── */
+.rb-samenvatting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+.rb-samenvatting-item strong {
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+.rb-samenvatting-sep {
+  opacity: 0.4;
+}
+
+/* ── Laden / leeg ─────────────────────────────────────────────── */
+.rb-laden {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  padding: 40px 0;
+}
+
+.rb-leeg {
+  background: var(--color-white);
+  border: 1px solid rgba(26, 28, 46, 0.08);
+  border-radius: var(--rb-radius);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  box-shadow: var(--rb-shadow);
+}
+
+/* ── Sectielabel ──────────────────────────────────────────────── */
+.rb-sectie-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 24px 0 10px;
+}
+
+/* ── Reservatielijst ──────────────────────────────────────────── */
+.rb-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Reservatiekaart ──────────────────────────────────────────── */
+.rb-kaart {
+  background: var(--color-white);
+  border: 1px solid rgba(26, 28, 46, 0.08);
+  border-radius: var(--rb-radius);
+  padding: 18px 20px;
+  box-shadow: var(--rb-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rb-kaart--geannuleerd {
+  opacity: 0.5;
+}
+
+.rb-kaart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rb-kaart-tijd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rb-kaart-tijdstip {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-blue-cobalt);
+  letter-spacing: -0.02em;
+}
+
+.rb-kaart-bron {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  opacity: 0.7;
+}
+
+.rb-kaart-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rb-kaart-naam {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.rb-kaart-meta {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.rb-kaart-meta a {
+  color: var(--color-blue-cobalt);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.rb-kaart-opmerking {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  font-style: italic;
+  line-height: 1.5;
+  padding: 8px 12px;
+  background: var(--color-cream-warm);
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+/* ── Status badges ────────────────────────────────────────────── */
+.rb-status-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+
+.status--nieuw {
+  background: rgba(245, 165, 32, 0.14);
+  color: var(--color-amber);
+}
+
+.status--bevestigd {
+  background: rgba(26, 92, 46, 0.1);
+  color: var(--color-open);
+}
+
+.status--geannuleerd {
+  background: rgba(26, 28, 46, 0.07);
+  color: var(--color-muted);
+}
+
+/* ── Kaartfout ────────────────────────────────────────────────── */
+.rb-kaart-fout {
+  font-size: 0.82rem;
+  color: #c0392b;
+  margin-top: 4px;
+}
+
+/* ── Bevestig-flits ───────────────────────────────────────────── */
+.rb-kaart--bevestigd-flits {
+  background: rgba(26, 92, 46, 0.06);
+  transition: background 1.2s ease;
+}
+
+/* ── Annuleer confirm ─────────────────────────────────────────── */
+.rb-annuleer-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--color-dark);
+}
+
+.rb-btn-annuleer-ja {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-white);
+  background: #c0392b;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.rb-btn-annuleer-ja:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.rb-btn-annuleer-nee {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  background: none;
+  border: 1px solid rgba(26, 28, 46, 0.15);
+  border-radius: 5px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.rb-btn-annuleer-nee:hover {
+  border-color: rgba(26, 28, 46, 0.3);
+}
+
+/* ── Kaartacties ──────────────────────────────────────────────── */
+.rb-kaart-acties {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rb-btn-bevestig {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-white);
+  background: var(--color-open);
+  border: none;
+  border-radius: 6px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.rb-btn-bevestig:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.rb-btn-annuleer {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  background: none;
+  border: 1px solid rgba(26, 28, 46, 0.15);
+  border-radius: 6px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.rb-btn-annuleer:hover:not(:disabled) {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.rb-btn-bevestig:disabled,
+.rb-btn-annuleer:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Zwevende knop ────────────────────────────────────────────── */
+.rb-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 20;
+  background: var(--color-blue-cobalt);
+  color: var(--color-white);
+  border: none;
+  border-radius: 14px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(36, 97, 168, 0.35);
+  transition:
+    background  0.2s ease,
+    transform   0.15s ease,
+    box-shadow  0.2s ease;
+}
+
+.rb-fab:hover {
+  background: var(--color-blue-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(36, 97, 168, 0.4);
+}
+
+.rb-fab:active {
+  transform: translateY(0);
+}
+
+/* ── Login scherm ─────────────────────────────────────────────── */
+.rb-login-wrap {
+  min-height: 100dvh;
+  background: var(--color-cream-warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.rb-login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-white);
+  border-radius: 16px;
+  border: 1px solid rgba(26, 28, 46, 0.07);
+  box-shadow: 0 4px 32px rgba(26, 28, 46, 0.1);
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.rb-login-logo {
+  height: 100px;
+  width: auto;
+  margin-bottom: 8px;
+}
+
+.rb-login-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-blue-cobalt);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.rb-login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.rb-login-fout {
+  font-size: 0.88rem;
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.06);
+  border: 1px solid rgba(192, 57, 43, 0.18);
+  border-radius: 6px;
+  padding: 10px 14px;
+  line-height: 1.5;
+}
+
+.rb-login-hint {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ── Formulier (gedeeld login + modal) ───────────────────────── */
+.rb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rb-field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.rb-input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  background: var(--color-cream);
+  border: 1.5px solid rgba(26, 28, 46, 0.14);
+  border-radius: 7px;
+  padding: 9px 13px;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.rb-input:focus {
+  outline: none;
+  border-color: var(--color-blue-cobalt);
+  box-shadow: 0 0 0 3px rgba(36, 97, 168, 0.12);
+}
+
+.rb-field--error .rb-input {
+  border-color: #c0392b;
+}
+
+.rb-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2357647F' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 34px;
+}
+
+.rb-textarea {
+  resize: vertical;
+  min-height: 68px;
+  line-height: 1.5;
+}
+
+.rb-input[type="number"]::-webkit-inner-spin-button,
+.rb-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.rb-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.rb-field-error {
+  font-size: 0.8rem;
+  color: #c0392b;
+}
+
+.rb-submit-error {
+  font-size: 0.88rem;
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.05);
+  border: 1px solid rgba(192, 57, 43, 0.18);
+  border-radius: 6px;
+  padding: 10px 14px;
+  line-height: 1.5;
+}
+
+/* ── Knoppen ──────────────────────────────────────────────────── */
+.rb-btn-primary {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-white);
+  background: var(--color-blue-cobalt);
+  border: none;
+  border-radius: 8px;
+  padding: 11px 24px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+
+.rb-btn-primary:hover:not(:disabled) {
+  background: var(--color-blue-navy);
+}
+
+.rb-btn-primary:disabled,
+.rb-btn--loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.rb-btn-secondary {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  background: none;
+  border: 1.5px solid rgba(26, 28, 46, 0.15);
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.rb-btn-secondary:hover {
+  border-color: rgba(26, 28, 46, 0.3);
+}
+
+/* ── Spinner ──────────────────────────────────────────────────── */
+.rb-spinner {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: rb-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+.rb-spinner--dark {
+  border-color: rgba(26, 28, 46, 0.15);
+  border-top-color: var(--color-muted);
+}
+
+@keyframes rb-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Modal ────────────────────────────────────────────────────── */
+.rb-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(26, 28, 46, 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: rb-overlay-in 0.25s ease;
+}
+
+@keyframes rb-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.rb-modal {
+  background: var(--color-white);
+  border-radius: 16px 16px 0 0;
+  width: 100%;
+  max-width: 640px;
+  max-height: 92dvh;
+  overflow-y: auto;
+  padding: 28px 24px 40px;
+  animation: rb-modal-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes rb-modal-in {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.rb-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.rb-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-blue-cobalt);
+}
+
+.rb-modal-close {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.rb-modal-close:hover {
+  background: var(--color-cream-warm);
+  color: var(--color-dark);
+}
+
+.rb-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rb-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.rb-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* ── Desktop modal: centered ──────────────────────────────────── */
+@media (min-width: 640px) {
+  .rb-modal-overlay {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .rb-modal {
+    border-radius: 16px;
+    padding: 32px 36px 40px;
+  }
+}
+
+/* ── Mobiel ───────────────────────────────────────────────────── */
+@media (max-width: 500px) {
+  .rb-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .rb-fab span {
+    display: none;
+  }
+
+  .rb-fab {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .rb-spinner,
+  .rb-spinner--dark {
+    animation: none;
+  }
+
+  .rb-modal,
+  .rb-modal-overlay {
+    animation: none;
+  }
+}

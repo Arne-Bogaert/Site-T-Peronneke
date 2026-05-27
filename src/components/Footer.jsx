@@ -3,10 +3,11 @@ import PrivacyModal from './PrivacyModal'
 import './Footer.css'
 
 const NAV_LINKS = [
-  { label: 'Over ons', href: '#over-ons' },
-  { label: 'Menu',     href: '#menu'     },
-  { label: 'Locatie',  href: '#locatie'  },
-  { label: 'Contact',  href: '#contact'  },
+  { label: 'Over ons',   href: '#over-ons'   },
+  { label: 'Menu',       href: '#menu'       },
+  { label: 'Locatie',    href: '#locatie'    },
+  { label: 'Contact',    href: '#contact'    },
+  { label: 'Reserveren', href: '#reserveren' },
 ]
 
 export default function Footer() {
